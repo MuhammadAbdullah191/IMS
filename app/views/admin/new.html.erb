@@ -1,0 +1,30 @@
+<div class="container">
+  <h2>Create New User</h2>
+
+  <%= form_with model: @admin, url: admin_index_path, local: true do |f| %>
+    <div class="field form-group d-flex flex-column">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-text text-muted' %>
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+
+    <div class="field form-group d-flex flex-column">
+      <%= f.label :password %>
+      <%= f.password_field :password, autocomplete: "new-password" %>
+    </div>
+    <div class="field form-group d-flex flex-column">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
+    
+    <div class="field form-group d-flex flex-column">
+      <%= f.label :role %>
+      <%= f.select :role, Admin.roles.keys.map { |type| [type.capitalize, type] }, { include_blank: true },class: "form-control" %>
+    </div>
+    <div class="actions py-3">
+      <%= f.submit "Sign up", class: 'btn btn-danger' %>
+      <%= link_to "Cancel", root_path, class:"btn btn-secondary"%>
+    </div>
+  <% end %>
+  
+</div>

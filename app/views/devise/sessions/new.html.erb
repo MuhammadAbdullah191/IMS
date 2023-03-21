@@ -1,0 +1,22 @@
+<div class="container d-flex flex-column justify-content-center align-items-center min-vh-100" >
+  <div class='card p-5'>
+    <div class='d-flex justify-content-center'>
+      <h4>IMS Login</h4>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field form-group p-2">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+      <div class="field form-group p-2">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Log in" %>
+      </div>
+    <% end %>
+    
+  </div>
+</div>
