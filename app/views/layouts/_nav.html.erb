@@ -1,6 +1,6 @@
 <% if current_admin%>
   <nav class="navbar navbar-light bg-light p-3">
-    <span class="navbar-brand mb-0 h1">Welcome to IMS</span>
+    <%= link_to "Welcome To IMS", root_path, class: "navbar-brand mb-0 h1"%>
     <%= button_to "logout", destroy_admin_session_path, class:"btn btn-danger", method: :delete%>
   </nav>
 <%end%>
