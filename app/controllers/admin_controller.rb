@@ -49,7 +49,7 @@ class AdminController < ApplicationController
   private
   
   def admin_params
-    params.require(:admin).permit(:email, :password, :password_confirmation, :role)
+    params.require(:admin).permit(:email, :password, :password_confirmation, :role, :username, :phone)
   end
 
   def set_admin
