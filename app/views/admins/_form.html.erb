@@ -1,14 +1,14 @@
 <%= form_with model: admin, local: true do |f| %>
 
   <div class="form-group">
-    <label for="inputAddress">Username</label>
-   <%= f.text_field :username, :class => 'form-control' %>
+    <label for= "inputAddress"> Username </label>
+   <%= f.text_field :username, class: 'form-control' %>
   </div>
 
   <div class="field form-group d-flex flex-column">
     <%= f.label :email %>
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-text text-muted' %>
-    <small id="emailHelp" class="form-text text-muted">i.e abc@xyz.com</small>
+    <small id="emailHelp" class="form-text text-muted"> i.e abc@xyz.com </small>
   </div>
 
   <div class="field form-group d-flex flex-column">
@@ -22,8 +22,8 @@
   </div>
 
   <div class="form-group">
-    <label for="inputAddress2">Phone</label>
-    <%= f.number_field :phone, :class => 'form-control' %>
+    <label for="inputAddress2"> Phone </label>
+    <%= f.number_field :phone, class: 'form-control' %>
   </div>
 
   <div class="field form-group d-flex flex-column">
@@ -32,7 +32,7 @@
   </div>
 
   <div class="actions py-3">
-    <%= f.submit "Sign up", class: 'btn btn-danger' %>
+    <%= f.submit "Submit", class: 'btn btn-danger' %>
     <%= link_to "Cancel", root_path, class:"btn btn-secondary"%>
   </div>
 

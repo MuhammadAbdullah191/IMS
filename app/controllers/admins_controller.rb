@@ -1,4 +1,4 @@
-class AdminController < ApplicationController
+class AdminsController < ApplicationController
   before_action :authenticate_admin!
   before_action :set_admin, only: [:edit, :update, :destroy]
 
@@ -17,7 +17,8 @@ class AdminController < ApplicationController
     authorize @admin
 
     if @admin.save
-      redirect_to admin_index_path, flash: { success: 'User Created Successfully' }
+      flash[:success] = 'User Create Successfully'
+      redirect_to admins_path
     else
       flash[:danger] = @admin.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
@@ -30,7 +31,8 @@ class AdminController < ApplicationController
 
   def update
     if @admin.update(admin_params)
-      redirect_to admin_index_path, flash: { success: 'User Created Successfully' }
+      flash[:success] = 'User Updated Successfully'
+      redirect_to admins_path
     else
       flash[:danger] = @admin.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
@@ -40,7 +42,8 @@ class AdminController < ApplicationController
 
   def destroy
     @admin.destroy
-    redirect_to admin_index_path, flash: { success: 'Admin Deleted successfully' }
+    flash[:success] = 'User Deleted Successfully'
+    redirect_to admins_path
   end
 
   def dashboard
