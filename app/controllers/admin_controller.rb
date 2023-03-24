@@ -29,7 +29,7 @@ class AdminController < ApplicationController
   end
 
   def update
-    if @admin.save
+    if @admin.update(admin_params)
       redirect_to admin_index_path, flash: { success: 'User Created Successfully' }
     else
       flash[:danger] = @admin.errors.full_messages.to_sentence
