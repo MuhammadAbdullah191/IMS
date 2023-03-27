@@ -37,15 +37,22 @@ class BrandsController < ApplicationController
   end
 
   def destroy
-    @brand.destroy
-    flash[:success] = 'Brand Deleted successfully'
+    if @brand.destroy
+      flash[:success] = 'Brand Deleted successfully'
+    else
+      flash[:danger] = @brand.errors.full_messages.to_sentence
+    end
     redirect_to brands_path
   end
 
   private
 
   def set_brand
-    @brand = Brand.find(params[:id])
+    @brand = Brand.find_by_id(params[:id])
+    if @brand.blank?
+      flash[:danger] = 'Brand Record Not Found'
+      redirect_to brands_path
+    end
   end
 
   def brand_params
