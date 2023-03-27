@@ -1,0 +1,18 @@
+<%= form_with model: brand , local: true do |f| %>
+
+  <div class= "form-group">
+    <label for= "inputAddress">Name</label>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group py-2">
+    <label for="exampleFormControlTextarea1">Description</label>
+    <%= f.text_area :description, class: 'form-control' %>
+  </div>
+
+  <div class="actions py-3">
+    <%= f.submit "Submit", class: 'btn btn-danger' %>
+    <%= link_to "Cancel", brands_path, class: "btn btn-secondary" %>
+  </div>
+
+<% end %>
