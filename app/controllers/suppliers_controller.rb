@@ -38,15 +38,22 @@ class SuppliersController < ApplicationController
   end
 
   def destroy
-    @supplier.destroy
-    flash[:success] = 'Supplier Deleted successfully'
-    redirect_to suppliers_path
+    if @supplier.destroy
+      flash[:success] = 'Supplier Deleted successfully'
+    else
+      flash[:danger] = @supplier.errors.full_messages.to_sentence
+    end
+      redirect_to suppliers_path
   end
 
   private
   
   def set_supplier
-    @supplier = Supplier.find(params[:id])
+    @supplier = Supplier.find_by_id(params[:id])
+    if @supplier.blank?
+      flash[:danger] = 'Record Not Found'
+      redirect_to suppliers_path
+    end
   end
 
   def supplier_params
