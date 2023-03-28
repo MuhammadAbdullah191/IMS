@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   resources :suppliers
   resources :brands
   resources :categories
+  resources :products
   root to: 'admins#dashboard'
 end
