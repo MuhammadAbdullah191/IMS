@@ -1,0 +1,29 @@
+<div class="container-fluid p-2">
+  <div class="heading text-center">
+    <h5>
+      Add Products
+    </h5>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Price</th>
+        <th scope="col">Location Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each_with_index do |product,index| %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= product.name%></td>
+          <td><%= product.stock%></td>
+          <td><%= product.price%></td>
+          <td><%= product.location_name%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
