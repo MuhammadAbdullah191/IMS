@@ -1,31 +1,27 @@
-<div class="container-fluid p-2">
-  <div class="heading text-center">
-    <h5>
-      Products
-    </h5>
-    <%= search_form_for @q, url: new_order_path do |f| %>
-      <%= f.search_field :name_cont %>
-      <%= f.submit %>
-    <% end %>
-  </div>
+<div class="container text-center p-5	cart-table">
+  <h1>Shopping cart</h1>
   <table class="table table-striped p-5">
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">Name</th>
-        <th scope="col">Stock</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Available Quantity</th>
         <th scope="col">Price</th>
+        <th scope="col">Total Price</th>
         <th scope="col">Location Name</th>
         <th scope="col">Add To Cart</th>
       </tr>
     </thead>
     <tbody>
-      <% @products.each_with_index do |product,index| %>
+      <% @cart.each_with_index do |product,index| %>
         <tr>
           <th scope="row"><%= index + 1 %></th>
           <td><%= product.name%></td>
+          <td><%= number_field_tag "product[#{product.id}]", 1, in: 1..product.stock, id: "field-#{product.id}"%></td>
           <td><%= product.stock%></td>
-          <td><%= product.price%></td>
+          <td id="product-price-<%= product.id %>"><%= product.price %></td>
+          <td id="total-price-<%= product.id %>"><%= product.price %></td>
           <td><%= product.location_name%></td>
           <td>
             <% if @cart.include?(product) %>
@@ -38,4 +34,6 @@
       <% end %>
     </tbody>
   </table>
+  <button type="button" class="btn btn-dark m-1">Place Order</button>
+  <hr>
 </div>

@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_admin!
-  
+  before_action :initialize_session
+  before_action :load_cart
+
 	include Pundit::Authorization
 
 	rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
@@ -14,6 +16,14 @@ class ApplicationController < ActionController::Base
 	
 	def pundit_user
     current_admin
+  end
+
+  def initialize_session
+    session[:cart] ||= [] # empty cart = empty array
+  end
+
+  def load_cart
+    @cart = Product.find(session[:cart])
   end
 	
 end

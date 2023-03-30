@@ -45,6 +45,21 @@ class ProductsController < ApplicationController
       redirect_to products_path
   end
 
+  def add_to_cart
+    id = params[:id].to_i
+    unless session[:cart].include?(id)
+      session[:cart] << id
+    end
+    redirect_to new_order_path
+  end
+
+  def remove_from_cart
+    id = params[:id].to_i
+    session[:cart].delete(id)
+    redirect_to new_order_path
+  end
+
+
   private
   
   def set_product

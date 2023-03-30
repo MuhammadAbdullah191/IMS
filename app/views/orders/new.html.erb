@@ -1,0 +1,4 @@
+<% if @cart.length > 0 %>
+  <%= render 'cart', cart: @cart %>
+<% end %>
+<%= render 'products', product: @products %>
