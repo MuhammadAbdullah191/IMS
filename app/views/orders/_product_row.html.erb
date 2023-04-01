@@ -1,0 +1,9 @@
+<tr>
+  <td><%= product.name%></td>
+  <td><%= product.stock%></td>
+  <td><%= product.price%></td>
+  <td><%= product.location_name%></td>
+  <td>
+    <%= button_to "Add to cart", nil, remote: true, method: :post, data: { product_id: product.id }, class:'add-to-cart-button' %>
+  </td>
+</tr>

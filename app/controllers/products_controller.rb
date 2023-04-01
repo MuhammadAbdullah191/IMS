@@ -50,13 +50,13 @@ class ProductsController < ApplicationController
     unless session[:cart].include?(id)
       session[:cart] << id
     end
-    redirect_to new_order_path
+    render partial: 'orders/cart_row', locals: { product: Product.find(id) }
   end
 
   def remove_from_cart
     id = params[:id].to_i
     session[:cart].delete(id)
-    redirect_to new_order_path
+    render partial: 'orders/product_row', locals: { product: Product.find(id) }
   end
 
 

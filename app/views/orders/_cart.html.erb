@@ -3,7 +3,6 @@
   <table class="table table-striped p-5">
     <thead>
       <tr>
-        <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Quantity</th>
         <th scope="col">Available Quantity</th>
@@ -16,7 +15,6 @@
     <tbody>
       <% @cart.each_with_index do |product,index| %>
         <tr>
-          <th scope="row"><%= index + 1 %></th>
           <td><%= product.name%></td>
           <td><%= number_field_tag "product[#{product.id}]", 1, in: 1..product.stock, id: "field-#{product.id}"%></td>
           <td><%= product.stock%></td>
@@ -24,11 +22,7 @@
           <td id="total-price-<%= product.id %>"><%= product.price %></td>
           <td><%= product.location_name%></td>
           <td>
-            <% if @cart.include?(product) %>
-              <%= button_to "Remove from cart", remove_from_cart_path(product), method: :delete %>
-            <% else %>
-              <%= button_to "Add to cart", add_to_cart_path(product) %>
-            <% end %>
+            <%= button_to "Remove From Cart", nil, remote: true, data: { product_id: product.id }, class:'remove-from-cart-button' %>
           </td>
         </tr>
       <% end %>

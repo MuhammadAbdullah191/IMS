@@ -8,10 +8,9 @@
       <%= f.submit %>
     <% end %>
   </div>
-  <table class="table table-striped p-5">
+  <table class="table table-striped p-5" id="product-table">
     <thead>
       <tr>
-        <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Stock</th>
         <th scope="col">Price</th>
@@ -21,20 +20,17 @@
     </thead>
     <tbody>
       <% @products.each_with_index do |product,index| %>
-        <tr>
-          <th scope="row"><%= index + 1 %></th>
-          <td><%= product.name%></td>
-          <td><%= product.stock%></td>
-          <td><%= product.price%></td>
-          <td><%= product.location_name%></td>
-          <td>
-            <% if @cart.include?(product) %>
-              <%= button_to "Remove from cart", remove_from_cart_path(product), method: :delete %>
-            <% else %>
-              <%= button_to "Add to cart", add_to_cart_path(product) %>
-            <% end %>
-          </td>
-        </tr>
+        <% if !@cart.include?(product) %>
+          <tr>
+            <td><%= product.name%></td>
+            <td><%= product.stock%></td>
+            <td><%= product.price%></td>
+            <td><%= product.location_name%></td>
+            <td>
+              <%= button_to "Add to cart", nil, remote: true, method: :post, data: { product_id: product.id }, class:'add-to-cart-button' %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
