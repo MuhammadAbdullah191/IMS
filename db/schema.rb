@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_28_103246) do
+ActiveRecord::Schema.define(version: 2023_04_01_193212) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -50,6 +50,18 @@ ActiveRecord::Schema.define(version: 2023_03_28_103246) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer "quantity", default: 1, null: false
+    t.string "description", default: "", null: false
+    t.integer "price", default: 1, null: false
+    t.integer "product_id", null: false
+    t.integer "order_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.string "consumer_name", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -72,6 +84,8 @@ ActiveRecord::Schema.define(version: 2023_03_28_103246) do
     t.index ["supplier_id"], name: "index_products_on_supplier_id"
   end
 
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "suppliers"
