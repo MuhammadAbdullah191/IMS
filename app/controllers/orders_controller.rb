@@ -1,12 +1,17 @@
 class OrdersController < ApplicationController
 
 	def index
+    @orders = Order.all
   end
 
   def new
     @order = Order.new
     @q = Product.ransack(params[:q])
 		@products = @q.result(distinct: true)
+  end
+
+  def show
+    @order = Order.find(params[:id])
   end
 
   def create
