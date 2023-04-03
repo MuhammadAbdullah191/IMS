@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def initialize_session
-    session[:cart] ||= [] # empty cart = empty array
+    session[:cart] ||= []
   end
 
   def load_cart

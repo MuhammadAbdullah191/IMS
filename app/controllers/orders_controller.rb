@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :set_pdf, only: [:download, :preview]
 
 	def index
     @orders = Order.all
@@ -15,6 +16,11 @@ class OrdersController < ApplicationController
   end
 
   def create
+    if session[:cart].empty?
+      flash[:danger] = 'Please select atlease one product to create order'
+      redirect_to new_order_path
+      return
+    end
     @order = Order.new
     ActiveRecord::Base.transaction do
       begin
@@ -22,7 +28,8 @@ class OrdersController < ApplicationController
         @order.save!
         process_products!
         session[:cart] = []
-        redirect_to new_order_path, notice: "Order was successfully created."
+        flash[:success] = 'Order was successfully created.'
+        redirect_to new_order_path
       rescue ArgumentError => e
         flash[:danger] = e.message
         render :new, status: :unprocessable_entity
@@ -30,9 +37,45 @@ class OrdersController < ApplicationController
       end
     end
   end
+
+  def download
+    send_data(@pdf.render,
+      filename: 'hello.pdf',
+      type: 'application/pdf'
+    )
+  end
+
+  def preview
+    send_data(@pdf.render,
+      filename: 'hello.pdf',
+      type: 'application/pdf',
+      disposition: 'inline'
+    )
+  end
+  
   
 
   private
+
+  def set_pdf
+    @order = Order.find_by_id(params[:id])
+    @pdf = Prawn::Document.new(
+      :page_size => 'A4')
+  
+    @pdf.text "Order Details", size: 20, style: :bold, align: :center
+  
+    @pdf.move_down 20
+    @pdf.text "Order ID: #{@order.id}"
+    @pdf.text "Order Date: #{@order.created_at.strftime("%B %d, %Y at %I:%M %p")}"
+  
+    @pdf.move_down 20
+    @pdf.text "Products Ordered", size: 16, style: :bold
+    table_data = [["Name", "Price", "Quantity", "Total Price"]]
+    @order.order_items.each do |item|
+      table_data << [item.description, item.price, item.quantity, item.price ]
+    end
+    @pdf.table table_data, header: true, position: :center, width: 500
+  end
 
   def calculate_total_price(products)
     total_price = 0
