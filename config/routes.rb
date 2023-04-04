@@ -6,5 +6,14 @@ Rails.application.routes.draw do
   resources :brands
   resources :categories
   resources :products
+  resources :orders do
+    member do
+      get :preview
+      get :download
+    end
+  end
+
+  post "products/add_to_cart/:id", to: "products#add_to_cart", as: "add_to_cart"
+  delete "products/remove_from_cart/:id", to: "products#remove_from_cart", as: "remove_from_cart"
   root to: 'admins#dashboard'
 end

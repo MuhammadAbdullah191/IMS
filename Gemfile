@@ -28,6 +28,8 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+gem 'ransack'
+
 gem 'devise'
 
 group :development, :test do
@@ -56,3 +58,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "pundit", "~> 2.3"
+
+gem "prawn", "~> 2.4"
+
+gem 'prawn-table', '~> 0.1.0'
+
