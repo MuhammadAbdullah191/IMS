@@ -63,3 +63,6 @@ gem "prawn", "~> 2.4"
 
 gem 'prawn-table', '~> 0.1.0'
 
+gem "chartkick"
+
+gem "groupdate"
