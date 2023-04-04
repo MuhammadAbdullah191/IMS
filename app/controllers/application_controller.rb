@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
   before_action :initialize_session
   before_action :load_cart
 
-	include Pundit::Authorization
+  include Pundit::Authorization
 
-	rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
 	private
 
@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     redirect_back(fallback_location: root_path)
   end
 	
-	def pundit_user
+  def pundit_user
     current_admin
   end
 

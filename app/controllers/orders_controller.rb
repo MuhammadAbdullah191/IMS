@@ -1,14 +1,14 @@
 class OrdersController < ApplicationController
   before_action :set_pdf, only: [:download, :preview]
 
-	def index
+  def index
     @orders = Order.all
   end
 
   def new
     @order = Order.new
     @q = Product.ransack(params[:q])
-		@products = @q.result(distinct: true)
+    @products = @q.result(distinct: true)
   end
 
   def show
@@ -53,8 +53,6 @@ class OrdersController < ApplicationController
     )
   end
   
-  
-
   private
 
   def set_pdf
@@ -68,6 +66,7 @@ class OrdersController < ApplicationController
       product = Product.find(product_id)
       total_price += product.price * quantity.to_i
     end
+
     total_price
   end
 

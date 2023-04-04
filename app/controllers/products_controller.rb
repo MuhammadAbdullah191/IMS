@@ -42,6 +42,7 @@ class ProductsController < ApplicationController
     else
       flash[:danger] = @product.errors.full_messages.to_sentence
     end
+
       redirect_to products_path
   end
 
@@ -50,6 +51,7 @@ class ProductsController < ApplicationController
     unless session[:cart].include?(id)
       session[:cart] << id
     end
+
     render partial: 'orders/cart_row', locals: { product: Product.find(id) }
   end
 
@@ -68,9 +70,11 @@ class ProductsController < ApplicationController
       flash[:danger] = 'Record Not Found'
       redirect_to products_path
     end
+
   end
 
   def product_params
     params.require(:product).permit(:name, :stock, :description, :price, :location_name, :brand_id, :category_id, :supplier_id)
   end
+  
 end
