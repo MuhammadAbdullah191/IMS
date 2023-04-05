@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="text-center m-1">
+    <h1>Products Order History</h1>
+  </div>
+  <div>
+    <%= render 'analytics', order_items: @order_items  %>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Sr No</th>
+        <th>Description</th>
+        <th>Total Price</th>
+        <th>Order ID</th>
+        <th>Product Name</th>
+        <th>Product Price</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order_items.each_with_index do |item, index| %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= item.description %></td>
+          <td><%= item.price %></td>
+          <td><%= item.order_id %></td>
+          <td><%= item.product.name%></td>
+          <td><%= item.product.price%></td>
+          <td><%= item.created_at %></td>
+          <td><%= link_to "View", order_item_path(item), class: "btn btn-light" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

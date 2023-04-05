@@ -1,0 +1,53 @@
+<div class="container m-3">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2>Product Details</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>ID</th>
+            <td><%= @product.id %></td>
+          </tr>
+          <tr>
+            <th>Stock</th>
+            <td><%= @product.stock %></td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td><%= @product.description %></td>
+          </tr>
+          <tr>
+            <th>Price</th>
+            <td><%= number_to_currency(@product.price) %></td>
+          </tr>
+          <tr>
+            <th>Location Name</th>
+            <td><%= @product.location_name %></td>
+          </tr>
+          <tr>
+            <th>Supplier ID</th>
+            <td><%= @product.supplier_id %></td>
+          </tr>
+          <tr>
+            <tr>
+              <th>Brand ID</th>
+              <td><%= @product.brand_id %></td>
+            </tr>
+            <tr>
+              <th>Category ID</th>
+              <td><%= @product.category_id %></td>
+            </tr>
+            <tr>
+              <th>Created At</th>
+              <td><%= @product.created_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+            </tr>
+            <tr>
+              <th>Updated At</th>
+              <td><%= @product.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+            </tr>
+          </tbody>
+        </table>
+        <%= link_to "Back to Product", products_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,44 @@
+<div class="container m-3">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2>Product Order Details</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>ID</th>
+            <td><%= @order_item.id %></td>
+          </tr>
+          <tr>
+            <th>Quantity</th>
+            <td><%= @order_item.quantity %></td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td><%= @order_item.description %></td>
+          </tr>
+          <tr>
+            <th>Price</th>
+            <td><%= number_to_currency(@order_item.price) %></td>
+          </tr>
+          <tr>
+            <th>Product ID</th>
+            <td><%= @order_item.product_id %></td>
+          </tr>
+          <tr>
+            <th>Order ID</th>
+            <td><%= @order_item.order_id %></td>
+          </tr>
+          <tr>
+            <th>Created At</th>
+            <td><%= @order_item.created_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+          </tr>
+          <tr>
+            <th>Updated At</th>
+            <td><%= @order_item.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+          </tr>
+        </tbody>
+      </table>
+      <%= link_to "Back to Order Items", order_items_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+</div>
