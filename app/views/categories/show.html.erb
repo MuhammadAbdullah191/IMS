@@ -1,0 +1,32 @@
+<div class="container m-3">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2>Category Details</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>ID</th>
+            <td><%= @category.id %></td>
+          </tr>
+          <tr>
+            <th>Title</th>
+            <td><%= @category.title %></td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td><%= @category.description %></td>
+          </tr>
+          <tr>
+            <th>Created At</th>
+            <td><%= @category.created_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+          </tr>
+          <tr>
+            <th>Updated At</th>
+            <td><%= @category.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+          </tr>
+        </tbody>
+      </table>
+      <%= link_to "Back to Category", categories_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+</div>

@@ -1,12 +1,16 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:edit, :update, :destroy]
+  before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   def index
     @categories = Category.all
+    authorize @categories
   end
 
   def new
     @category = Category.new
+  end
+
+  def show
   end
 
   def create
@@ -20,6 +24,7 @@ class CategoriesController < ApplicationController
       render :new, status: :unprocessable_entity
     end
 
+    authorize @category
   end
 
   def edit
@@ -53,7 +58,8 @@ class CategoriesController < ApplicationController
       flash[:danger] = 'Category Record Not Found'
       redirect_to categories_path
     end
-    
+
+    authorize @category
   end
 
   def category_params

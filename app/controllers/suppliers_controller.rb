@@ -1,13 +1,17 @@
 class SuppliersController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_supplier, only: [:edit, :update, :destroy]
+  before_action :set_supplier, only: [:show, :edit, :update, :destroy]
 
   def index
     @suppliers = Supplier.all
+    authorize @suppliers
   end
 
   def new
     @supplier = Supplier.new
+  end
+
+  def show
   end
 
   def create
@@ -21,6 +25,7 @@ class SuppliersController < ApplicationController
       render :new, status: :unprocessable_entity
     end
 
+    authorize @supplier
   end
 
   def edit
@@ -54,6 +59,8 @@ class SuppliersController < ApplicationController
       flash[:danger] = 'Record Not Found'
       redirect_to suppliers_path
     end
+
+    authorize @supplier
   end
 
   def supplier_params

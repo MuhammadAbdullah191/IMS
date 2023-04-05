@@ -4,16 +4,17 @@ class OrdersController < ApplicationController
   
   def index
     @orders = Order.all
+    authorize @orders
   end
 
   def new
     @order = Order.new
     @q = Product.ransack(params[:q])
     @products = @q.result(distinct: true)
+    authorize @order
   end
 
   def show
-    @order = Order.find(params[:id])
   end
 
   def create
@@ -23,6 +24,7 @@ class OrdersController < ApplicationController
       return
     end
     @order = Order.new
+    authorize @order
     ActiveRecord::Base.transaction do
       begin
         ensure_valid_products!
@@ -73,7 +75,7 @@ class OrdersController < ApplicationController
       flash[:danger] = 'Record Not Found'
       redirect_to orders_path
     end
-
+    authorize @order
   end
 
   def set_pdf

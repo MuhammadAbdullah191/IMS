@@ -1,0 +1,32 @@
+<div class="container m-3">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2>Brand Details</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>ID</th>
+            <td><%= @brand.id %></td>
+          </tr>
+          <tr>
+            <th>Name</th>
+            <td><%= @brand.name %></td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td><%= @brand.description %></td>
+          </tr>
+          <tr>
+            <th>Created At</th>
+            <td><%= @brand.created_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+          </tr>
+          <tr>
+            <th>Updated At</th>
+            <td><%= @brand.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+          </tr>
+        </tbody>
+      </table>
+      <%= link_to "Back to Brand", brands_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+</div>
