@@ -6,11 +6,21 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
+  def route_not_found
+    render file: Rails.public_path.join('404.html'), status: :not_found, layout: false
+  end
 
 	private
 
   def user_not_authorized
-    flash[:alert] = "You are not authorized to perform this action."
+    flash[:danger] = "You are not authorized to perform this action."
+    redirect_back(fallback_location: root_path)
+  end
+
+  def record_not_found
+    flash[:danger] = 'This record is not found'
     redirect_back(fallback_location: root_path)
   end
 	

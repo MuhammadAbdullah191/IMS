@@ -1,12 +1,9 @@
 <div class="container-fluid p-2">
   <div class="heading text-center">
     <h5>
-      Products
+      Search Products
     </h5>
-    <%= search_form_for @q, url: new_order_path do |f| %>
-      <%= f.search_field :name_cont %>
-      <%= f.submit %>
-    <% end %>
+    <%= render 'products/search_form' %>
   </div>
   <table class="table table-striped p-5" id="product-table">
     <thead>
@@ -14,6 +11,8 @@
         <th scope="col">Name</th>
         <th scope="col">Stock</th>
         <th scope="col">Price</th>
+        <th scope="col">Brand</th>
+        <th scope="col">Category</th>
         <th scope="col">Location Name</th>
         <th scope="col">Add To Cart</th>
       </tr>
@@ -25,6 +24,8 @@
             <td><%= product.name %></td>
             <td><%= product.stock %></td>
             <td><%= product.price %></td>
+            <td><%= product.brand.name %></td>
+            <td><%= product.category.title %></td>
             <td><%= product.location_name %></td>
             <td>
               <%= button_to "Add to cart", nil, remote: true, method: :post, data: { product_id: product.id }, class:'add-to-cart-button' %>

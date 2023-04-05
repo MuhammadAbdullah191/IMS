@@ -1,0 +1,56 @@
+<% if current_admin %>
+  <div class="container-fluid ">
+    <div class="row flex-nowrap">
+      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+          <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <span class="fs-5 d-none d-sm-inline">Menu</span>
+          </a>
+          <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+            <li class="nav-item d-flex align-items-center">
+              <a href="#" class="nav-link align-middle px-0 text-white">
+                <i class="fa-solid fa-house"></i><%= link_to "Users", admins_path, class: "text-decoration-none ms-2 text-white" %>
+              </a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <a href="#" class="nav-link align-middle px-0 text-white">
+                <i class="fa-solid fa-table-cells-large"></i><%= link_to "Products", products_path, class: " text-decoration-none ms-2 text-white" %>
+              </a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <a href="#" class="nav-link align-middle px-0 text-white">
+                <i class="fa-solid fa-gauge"></i><%= link_to "Orders", orders_path, class: " text-decoration-none ms-2 text-white" %>
+              </a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <a href="#" class="nav-link align-middle px-0 text-white">
+                <i class="fa-solid fa-calendar-days"></i><%= link_to "Brands", brands_path, class: " text-decoration-none ms-2 text-white" %>
+              </a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <a href="#" class="nav-link align-middle px-0 text-white">
+                <i class="fa-solid fa-gauge"></i><%= link_to "Categories", categories_path, class: " text-decoration-none ms-2 text-white" %>
+              </a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <a href="#" class="nav-link align-middle px-0 text-white">
+                <i class="fa-solid fa-truck-fast"></i><%= link_to "Supplier", suppliers_path, class: " text-decoration-none ms-2 text-white" %>
+              </a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <a href="#" class="nav-link align-middle px-0 text-white">
+                <i class="fa-solid fa-chart-simple"></i><%= link_to "Analytics", order_items_path, class: " text-decoration-none ms-2 text-white" %>
+              </a>
+            </li>
+          </ul>
+          <hr>
+        </div>
+      </div>
+      <div class="col py-3">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+<%else%>
+  <%= yield %>
+<% end %>

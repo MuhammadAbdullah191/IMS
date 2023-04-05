@@ -1,8 +1,10 @@
 <div class="container">
+  <div class="text-center m-5">
+    <%= link_to "Create New Order", new_order_path, class: "btn btn-success" %>
+  </div>
   <div class="text-center">
     <h1>Orders</h1>
   </div>
-
   <table class="table table-striped">
     <thead>
       <tr>
@@ -20,15 +22,12 @@
           <td><%= order.id %></td>
           <td><%= order.created_at %></td>
           <td>The Don</td>
-          <td><%= link_to "View", order_path(order), class: "btn btn-dark" %></td>
+          <td>
+            <%= link_to "View", order_path(order), class: "btn btn-dark" %>
+            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-
-  <div class="text-center m-5">
-    <%= link_to "Create New Order", new_order_path, class: "btn btn-success" %>
-  </div>
-
 </div>
-

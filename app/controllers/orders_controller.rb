@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_pdf, only: [:download, :preview]
-
+  before_action :set_order, only: [:show, :destroy]
+  
   def index
     @orders = Order.all
   end
@@ -38,6 +39,17 @@ class OrdersController < ApplicationController
     end
   end
 
+  def destroy
+    @order = Order.find_by_id(params[:id])
+    if @order.destroy
+      flash[:success] = 'Order Deleted successfully'
+    else
+      flash[:danger] = @order.errors.full_messages.to_sentence
+    end
+
+      redirect_to orders_path
+  end
+
   def download
     send_data(@pdf.render,
       filename: 'hello.pdf',
@@ -54,6 +66,15 @@ class OrdersController < ApplicationController
   end
   
   private
+
+  def set_order
+    @order = Order.find_by_id(params[:id])
+    if @order.blank?
+      flash[:danger] = 'Record Not Found'
+      redirect_to orders_path
+    end
+
+  end
 
   def set_pdf
     @order = Order.find_by_id(params[:id])
