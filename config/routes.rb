@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   post "products/add_to_cart/:id", to: "products#add_to_cart", as: "add_to_cart"
   delete "products/remove_from_cart/:id", to: "products#remove_from_cart", as: "remove_from_cart"
   root to: 'orders#index'
+
+  match '*unmatched', to: 'application#route_not_found', via: :all
 end

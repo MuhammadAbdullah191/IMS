@@ -3,7 +3,12 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :destroy]
   
   def index
-    @orders = Order.all
+    params[:q] ||= {}
+    if params[:q][:created_at_lteq].present?
+      params[:q][:created_at_lteq] = params[:q][:created_at_lteq].to_date.end_of_day
+    end
+    @q = Order.ransack(params[:q])
+    @orders = @q.result(distinct: true)
     authorize @orders
   end
 

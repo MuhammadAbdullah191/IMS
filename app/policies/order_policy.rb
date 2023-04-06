@@ -9,7 +9,7 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def new?
-    @user.Admin?
+    index?
   end
 
   def create?

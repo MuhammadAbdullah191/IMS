@@ -1,0 +1,7 @@
+<%= search_form_for @q, url: orders_path, class: 'form-inline' do |f| %>
+  <%= f.label 'From' %>
+  <%= f.date_field :created_at_gteq %>
+  <%= f.label 'To' %>
+  <%= f.date_field :created_at_lteq %>
+  <%= f.submit %>
+<% end %>

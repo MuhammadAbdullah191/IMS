@@ -3,7 +3,8 @@ class SuppliersController < ApplicationController
   before_action :set_supplier, only: [:show, :edit, :update, :destroy]
 
   def index
-    @suppliers = Supplier.all
+    @q = Supplier.ransack(params[:q])
+    @suppliers = @q.result(distinct: true)
     authorize @suppliers
   end
 

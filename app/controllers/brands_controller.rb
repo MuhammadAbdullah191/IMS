@@ -2,7 +2,8 @@ class BrandsController < ApplicationController
   before_action :set_brand, only: [:show, :edit, :update, :destroy]
 
   def index
-    @brands = Brand.all
+    @q = Brand.ransack(params[:q])
+    @brands = @q.result(distinct: true)
     authorize @brands
   end
 

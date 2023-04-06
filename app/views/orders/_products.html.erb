@@ -3,7 +3,7 @@
     <h5>
       Search Products
     </h5>
-    <%= render 'products/search_form' %>
+    <%= render partial:'products/search_form', locals: {path: new_order_path} %>
   </div>
   <table class="table table-striped p-5" id="product-table">
     <thead>

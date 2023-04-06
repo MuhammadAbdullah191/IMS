@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def route_not_found
-    render file: Rails.public_path.join('404.html'), status: :not_found, layout: false
+    flash[:danger] = 'This route does not exist'
+    redirect_back(fallback_location: root_path)
   end
 
   private
