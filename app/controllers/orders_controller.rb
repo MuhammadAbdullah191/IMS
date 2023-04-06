@@ -42,7 +42,6 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    @order = Order.find_by_id(params[:id])
     if @order.destroy
       flash[:success] = 'Order Deleted successfully'
     else

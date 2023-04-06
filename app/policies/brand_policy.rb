@@ -1,22 +1,22 @@
 class BrandPolicy < ApplicationPolicy
 
-	def index?
-		@user.present?
-	end
+  def index?
+    @user.present?
+  end
 
-	def show?
-		index?
-	end
+  def show?
+    index?
+  end
 
-	def new?
+  def new?
     @user.Admin?
-	end
+  end
 
-	def create?
+  def create?
     new?
-	end
+  end
 
-	def edit?
+  def edit?
     new?
   end
 
@@ -24,7 +24,7 @@ class BrandPolicy < ApplicationPolicy
     edit?
   end
 
-	def destroy?
+  def destroy?
     edit?
   end
 	

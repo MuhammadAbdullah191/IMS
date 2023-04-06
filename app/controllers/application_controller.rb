@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     render file: Rails.public_path.join('404.html'), status: :not_found, layout: false
   end
 
-	private
+  private
 
   def user_not_authorized
     flash[:danger] = "You are not authorized to perform this action."

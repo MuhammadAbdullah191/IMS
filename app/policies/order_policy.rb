@@ -9,23 +9,23 @@ class OrderPolicy < ApplicationPolicy
 	end
 
 	def new?
-    @user.Admin?
+		@user.Admin?
 	end
 
 	def create?
-    new?
+		new?
 	end
 
 	def edit?
-    new?
-  end
+		new?
+	end
 
-  def update?
-    edit?
-  end
+	def update?
+		edit?
+	end
 
 	def destroy?
-    edit?
-  end
+		edit?
+	end
 	
 end
