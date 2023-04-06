@@ -1,12 +1,17 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:edit, :update, :destroy]
+  before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   def index
-    @categories = Category.all
+    @q = Category.ransack(params[:q])
+    @categories = @q.result(distinct: true)
+    authorize @categories
   end
 
   def new
     @category = Category.new
+  end
+
+  def show
   end
 
   def create
@@ -20,6 +25,7 @@ class CategoriesController < ApplicationController
       render :new, status: :unprocessable_entity
     end
 
+    authorize @category
   end
 
   def edit
@@ -49,9 +55,12 @@ class CategoriesController < ApplicationController
 
   def set_category
     @category = Category.find_by_id(params[:id])
+    
     if @category.blank?
       flash[:danger] = 'Category Record Not Found'
       redirect_to categories_path
+    else
+      authorize Category
     end
     
   end

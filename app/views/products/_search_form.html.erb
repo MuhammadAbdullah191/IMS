@@ -1,0 +1,11 @@
+<%= search_form_for @q, url: path do |f| %>
+  <div class = 'p-2'>
+    <%= f.label :name_cont %>
+    <%= f.search_field :name_cont %>
+    <%= f.label 'Brand' %>
+    <%= f.select :brand_id_eq, options_for_select(Brand.all.pluck(:name, :id)), {include_blank: 'none'}  %>
+    <%= f.label 'Category' %>
+    <%= f.select :category_id_eq, options_for_select(Category.all.pluck(:title, :id)), {include_blank: 'none'} %>
+  </div>
+  <%= f.submit %>
+<% end %>

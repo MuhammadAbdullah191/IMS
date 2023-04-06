@@ -1,8 +1,10 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:edit, :update, :destroy]
+  before_action :set_product, only: [:edit, :update, :show, :destroy]
 
   def index
-    @products = Product.all
+    @q = Product.ransack(params[:q])
+    @products = @q.result(distinct: true)
+    authorize @products
   end
 
   def new
@@ -10,7 +12,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
   end
 
   def create
@@ -74,7 +75,7 @@ class ProductsController < ApplicationController
       flash[:danger] = 'Record Not Found'
       redirect_to products_path
     end
-
+    authorize @product
   end
 
   def product_params
