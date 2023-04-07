@@ -1,15 +1,14 @@
 class AdminsController < ApplicationController
   before_action :set_admin, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user
 
   def index
     @admins = Admin.all
     @admins = @admins.all.page(params[:page]).per(6)
-    authorize @admins
   end
 
   def new
     @admin = Admin.new
-    authorize @admin
   end
 
   def show
@@ -17,7 +16,6 @@ class AdminsController < ApplicationController
 
   def create
     @admin = Admin.new(admin_params)
-    authorize @admin
 
     if @admin.save
       flash[:success] = 'User Create Successfully'
@@ -49,10 +47,11 @@ class AdminsController < ApplicationController
     redirect_to admins_path
   end
 
-  def dashboard
-  end
-
   private
+
+  def authorize_user
+    authorize Admin
+  end
   
   def admin_params
     params.require(:admin).permit(:email, :password, :password_confirmation, :role, :username, :phone)
@@ -64,7 +63,6 @@ class AdminsController < ApplicationController
       flash[:danger] = 'Admin Record Not Found'
       redirect_to admins_path
     end
-    authorize @admin
   end
 
 end

@@ -1,10 +1,10 @@
 class BrandsController < ApplicationController
   before_action :set_brand, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user
 
   def index
     @q = Brand.ransack(params[:q])
     @brands = @q.result(distinct: true).all.page(params[:page]).per(6)
-    authorize @brands
   end
 
   def new
@@ -25,7 +25,6 @@ class BrandsController < ApplicationController
       flash[:danger] = @brand.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
     end
-    authorize @brand
   end
 
   def edit
@@ -59,13 +58,16 @@ class BrandsController < ApplicationController
 
   private
 
+  def authorize_user
+    authorize Brand
+  end
+
   def set_brand
     @brand = Brand.find_by_id(params[:id])
     if @brand.blank?
       flash[:danger] = 'Brand Record Not Found'
       redirect_to brands_path
     end
-    authorize @brand
   end
 
   def brand_params

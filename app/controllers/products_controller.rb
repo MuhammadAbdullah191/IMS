@@ -1,10 +1,10 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:edit, :update, :show, :destroy]
+  before_action :authorize_user
 
   def index
     @q = Product.ransack(params[:q])
     @products = @q.result(distinct: true).all.page(params[:page]).per(6)
-    authorize @products
   end
 
   def new
@@ -79,6 +79,10 @@ class ProductsController < ApplicationController
   end
 
   private
+
+  def authorize_user
+    authorize Product
+  end
   
   def set_product
     @product = Product.find_by_id(params[:id])
@@ -86,7 +90,6 @@ class ProductsController < ApplicationController
       flash[:danger] = 'Record Not Found'
       redirect_to products_path
     end
-    authorize @product
   end
 
   def product_params

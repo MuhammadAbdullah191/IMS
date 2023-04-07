@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_pdf, only: [:download, :preview]
   before_action :set_order, only: [:show, :destroy]
+  before_action :authorize_user
   
   def index
     params[:q] ||= {}
@@ -9,14 +10,12 @@ class OrdersController < ApplicationController
     end
     @q = Order.ransack(params[:q])
     @orders = @q.result(distinct: true).all.page(params[:page]).per(6)
-    authorize @orders
   end
 
   def new
     @order = Order.new
     @q = Product.ransack(params[:q])
     @products = @q.result(distinct: true)
-    authorize @order
   end
 
   def show
@@ -29,7 +28,6 @@ class OrdersController < ApplicationController
       return
     end
     @order = Order.new
-    authorize @order
     ActiveRecord::Base.transaction do
       begin
         ensure_valid_products!
@@ -73,13 +71,16 @@ class OrdersController < ApplicationController
   
   private
 
+  def authorize_user
+    authorize Order
+  end
+
   def set_order
     @order = Order.find_by_id(params[:id])
     if @order.blank?
       flash[:danger] = 'Record Not Found'
       redirect_to orders_path
     end
-    authorize @order
   end
 
   def set_pdf

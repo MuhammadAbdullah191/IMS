@@ -25,7 +25,7 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def destroy?
-    edit?
+    @user.Admin?
   end
 	
 end

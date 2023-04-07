@@ -1,11 +1,11 @@
 class SuppliersController < ApplicationController
   before_action :authenticate_admin!
   before_action :set_supplier, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user
 
   def index
     @q = Supplier.ransack(params[:q])
     @suppliers = @q.result(distinct: true).all.page(params[:page]).per(6)
-    authorize @suppliers
   end
 
   def new
@@ -27,7 +27,6 @@ class SuppliersController < ApplicationController
       render :new, status: :unprocessable_entity
     end
 
-    authorize @supplier
   end
 
   def edit
@@ -60,6 +59,10 @@ class SuppliersController < ApplicationController
   end
 
   private
+
+  def authorize_user
+    authorize Supplier
+  end
   
   def set_supplier
     @supplier = Supplier.find_by_id(params[:id])
@@ -68,7 +71,6 @@ class SuppliersController < ApplicationController
       redirect_to suppliers_path
     end
 
-    authorize @supplier
   end
 
   def supplier_params
