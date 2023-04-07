@@ -17,6 +17,7 @@ class SuppliersController < ApplicationController
 
   def create
     @supplier = Supplier.new(supplier_params)
+    @supplier.image.attach(params[:supplier][:image])
 
     if @supplier.save
       flash[:success] = 'Supplier Created Successfully'
@@ -33,6 +34,8 @@ class SuppliersController < ApplicationController
   end
 
   def update
+    @supplier.image.attach(params[:supplier][:image])
+
     if @supplier.update(supplier_params)
       flash[:success] = 'Supplier Updated Successfully'
       redirect_to suppliers_path
@@ -65,7 +68,7 @@ class SuppliersController < ApplicationController
   end
 
   def supplier_params
-    params.require(:supplier).permit(:name, :email, :phone, :address)
+    params.require(:supplier).permit(:name, :email, :phone, :address, :image)
   end
 
 

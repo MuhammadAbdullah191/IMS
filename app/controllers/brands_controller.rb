@@ -16,6 +16,7 @@ class BrandsController < ApplicationController
 
   def create
     @brand = Brand.new(brand_params)
+    @brand.image.attach(params[:brand][:image])
 
     if @brand.save
       flash[:success] = 'Brand Created Successfully'
@@ -31,6 +32,8 @@ class BrandsController < ApplicationController
   end
 
   def update
+    @brand.image.attach(params[:brand][:image])
+
     if @brand.update(brand_params)
       flash[:success] = 'Brand Updated Successfully'
       redirect_to brands_path
@@ -62,7 +65,7 @@ class BrandsController < ApplicationController
   end
 
   def brand_params
-    params.require(:brand).permit(:name, :description)
+    params.require(:brand).permit(:name, :description, :image)
   end
 
 end

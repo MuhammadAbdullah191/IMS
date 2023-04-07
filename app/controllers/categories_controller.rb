@@ -16,6 +16,7 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
+    @category.image.attach(params[:category][:image])
 
     if @category.save
       flash[:success] = 'Category Created Successfully'
@@ -32,6 +33,8 @@ class CategoriesController < ApplicationController
   end
 
   def update
+    @category.image.attach(params[:category][:image])
+
     if @category.update(category_params)
       flash[:success] = 'Category Updated Successfully'
       redirect_to categories_path
@@ -66,6 +69,6 @@ class CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:category).permit(:title, :description)
+    params.require(:category).permit(:title, :description, :image)
   end
 end
