@@ -68,3 +68,5 @@ gem "chartkick"
 gem "groupdate"
 
 gem 'activestorage'
+
+gem 'kaminari', '~> 1.2.1'

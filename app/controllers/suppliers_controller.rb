@@ -4,7 +4,7 @@ class SuppliersController < ApplicationController
 
   def index
     @q = Supplier.ransack(params[:q])
-    @suppliers = @q.result(distinct: true)
+    @suppliers = @q.result(distinct: true).all.page(params[:page]).per(6)
     authorize @suppliers
   end
 

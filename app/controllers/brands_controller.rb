@@ -3,7 +3,7 @@ class BrandsController < ApplicationController
 
   def index
     @q = Brand.ransack(params[:q])
-    @brands = @q.result(distinct: true)
+    @brands = @q.result(distinct: true).all.page(params[:page]).per(6)
     authorize @brands
   end
 

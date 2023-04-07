@@ -3,6 +3,7 @@ class AdminsController < ApplicationController
 
   def index
     @admins = Admin.all
+    @admins = @admins.all.page(params[:page]).per(6)
     authorize @admins
   end
 

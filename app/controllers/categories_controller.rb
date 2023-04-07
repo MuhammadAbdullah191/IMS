@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
 
   def index
     @q = Category.ransack(params[:q])
-    @categories = @q.result(distinct: true)
+    @categories = @q.result(distinct: true).all.page(params[:page]).per(6)
     authorize @categories
   end
 

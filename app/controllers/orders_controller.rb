@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
       params[:q][:created_at_lteq] = params[:q][:created_at_lteq].to_date.end_of_day
     end
     @q = Order.ransack(params[:q])
-    @orders = @q.result(distinct: true)
+    @orders = @q.result(distinct: true).all.page(params[:page]).per(6)
     authorize @orders
   end
 
