@@ -16,6 +16,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    @product.image.attach(params[:product][:image])
 
     if @product.save
       flash[:success] = 'Product Created Successfully'
@@ -31,6 +32,8 @@ class ProductsController < ApplicationController
   end
 
   def update
+    @product.image.purge
+    @product.image.attach(params[:product][:image])
     if @product.update(product_params)
       flash[:success] = 'Product Updated Successfully'
       redirect_to products_path
@@ -66,6 +69,11 @@ class ProductsController < ApplicationController
     render partial: 'orders/product_row', locals: { product: Product.find(id) }
   end
 
+  def delete_image_attachment
+    @image = ActiveStorage::Attachment.find_by_id(params[:id])
+    @image.purge
+    redirect_to request.referrer
+  end
 
   private
   
@@ -79,7 +87,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :stock, :description, :price, :location_name, :brand_id, :category_id, :supplier_id)
+    params.require(:product).permit(:name, :stock, :description, :price, :location_name, :brand_id, :category_id, :supplier_id, :image)
   end
   
 end
