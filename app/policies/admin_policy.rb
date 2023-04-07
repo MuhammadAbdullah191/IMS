@@ -8,6 +8,10 @@ class AdminPolicy < ApplicationPolicy
     index?
 	end
 
+	def show?
+		index?
+	end
+
 	def create?
     new?
 	end

@@ -33,7 +33,11 @@ class CategoriesController < ApplicationController
   end
 
   def update
-    @category.image.attach(params[:category][:image])
+    if params[:category][:image].present?
+      @category.image.attach(params[:category][:image])
+    elsif !@category.image.attached?
+      @category.image.attach(@category.image.blob)
+    end
 
     if @category.update(category_params)
       flash[:success] = 'Category Updated Successfully'

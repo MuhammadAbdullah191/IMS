@@ -10,7 +10,7 @@
   <div class="field form-group d-flex flex-column py-2">
     <%= f.label :images %>
     <% if category.image.attached? %>
-      <%= image_tag brand.image, class: 'w-25 rounded m-3 ' %>
+      <%= image_tag category.image, class: 'w-25 rounded m-3 ' %>
       <%= link_to 'Remove', delete_image_attachment_product_url(category.image.id),
                 method: :delete,
                 data: { confirm: 'Are you sure?' } %>

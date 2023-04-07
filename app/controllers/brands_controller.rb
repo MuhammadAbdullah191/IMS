@@ -32,7 +32,11 @@ class BrandsController < ApplicationController
   end
 
   def update
-    @brand.image.attach(params[:brand][:image])
+    if params[:brand][:image].present?
+      @brand.image.attach(params[:brand][:image])
+    elsif !@brand.image.attached?
+      @brand.image.attach(@brand.image.blob)
+    end
 
     if @brand.update(brand_params)
       flash[:success] = 'Brand Updated Successfully'

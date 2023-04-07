@@ -32,8 +32,12 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @product.image.purge
-    @product.image.attach(params[:product][:image])
+    if params[:product][:image].present?
+      @product.image.attach(params[:product][:image])
+    elsif !@product.image.attached?
+      @product.image.attach(@product.image.blob)
+    end
+    
     if @product.update(product_params)
       flash[:success] = 'Product Updated Successfully'
       redirect_to products_path
@@ -41,7 +45,6 @@ class ProductsController < ApplicationController
       flash[:danger] = @product.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
     end
-    
   end
 
   def destroy
@@ -60,13 +63,13 @@ class ProductsController < ApplicationController
       session[:cart] << id
     end
 
-    render partial: 'orders/cart_row', locals: { product: Product.find(id) }
+    render partial: 'orders/cart_row', locals: { product: Product.find_by_id(id) }
   end
 
   def remove_from_cart
     id = params[:id].to_i
     session[:cart].delete(id)
-    render partial: 'orders/product_row', locals: { product: Product.find(id) }
+    render partial: 'orders/product_row', locals: { product: Product.find_by_id(id) }
   end
 
   def delete_image_attachment
@@ -87,7 +90,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :stock, :description, :price, :location_name, :brand_id, :category_id, :supplier_id, :image)
+    params.require(:product).permit(:name, :stock, :description, :price, :location_name, :brand_id, :category_id, :supplier_id)
   end
   
 end

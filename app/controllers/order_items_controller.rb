@@ -6,7 +6,11 @@ class OrderItemsController < ApplicationController
   end
 
   def show
-    @order_item = OrderItem.find(params[:id])
+    @order_item = OrderItem.find_by_id(params[:id])
+    if @order_item.blank?
+      flash[:danger] = 'Admin Record Not Found'
+      redirect_to order_items_path
+    end
   end
 
 end

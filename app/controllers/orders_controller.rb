@@ -90,7 +90,7 @@ class OrdersController < ApplicationController
   def calculate_total_price(products)
     total_price = 0
     products.each do |product_id, quantity|
-      product = Product.find(product_id)
+      product = Product.find_by_id(product_id)
       total_price += product.price * quantity.to_i
     end
 
@@ -113,7 +113,7 @@ class OrdersController < ApplicationController
 
   def process_products!
     params[:product].each do |product_id, quantity|
-      product = Product.find(product_id)
+      product = Product.find_by_id(product_id)
       @order.order_items.create(
         product_id: product_id,
         description: product.name,

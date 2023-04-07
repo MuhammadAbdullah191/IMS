@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  before_action :set_admin, only: [:edit, :update, :destroy]
+  before_action :set_admin, only: [:show, :edit, :update, :destroy]
 
   def index
     @admins = Admin.all
@@ -10,6 +10,9 @@ class AdminsController < ApplicationController
   def new
     @admin = Admin.new
     authorize @admin
+  end
+
+  def show
   end
 
   def create
@@ -56,7 +59,11 @@ class AdminsController < ApplicationController
   end
 
   def set_admin
-    @admin = Admin.find(params[:id])
+    @admin = Admin.find_by_id(params[:id])
+    if @admin.blank?
+      flash[:danger] = 'Admin Record Not Found'
+      redirect_to admins_path
+    end
     authorize @admin
   end
 

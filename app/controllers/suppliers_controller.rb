@@ -34,7 +34,11 @@ class SuppliersController < ApplicationController
   end
 
   def update
-    @supplier.image.attach(params[:supplier][:image])
+    if params[:supplier][:image].present?
+      @supplier.image.attach(params[:supplier][:image])
+    elsif !@supplier.image.attached?
+      @supplier.image.attach(@supplier.image.blob)
+    end
 
     if @supplier.update(supplier_params)
       flash[:success] = 'Supplier Updated Successfully'

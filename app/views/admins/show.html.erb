@@ -1,0 +1,32 @@
+<div class="container m-3">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Admin Details</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>ID</th>
+            <td><%= @admin.id %></td>
+          </tr>
+          <tr>
+            <th>Eamil</th>
+            <td><%= @admin.email %></td>
+          </tr>
+          <tr>
+            <th>Username</th>
+            <td><%= @admin.username %></td>
+          </tr>
+          <tr>
+            <th>Created At</th>
+            <td><%= @admin.created_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+          </tr>
+          <tr>
+            <th>Updated At</th>
+            <td><%= @admin.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+          </tr>
+        </tbody>
+      </table>
+      <%= link_to "Back to Admin Dashboard", admins_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+</div>
