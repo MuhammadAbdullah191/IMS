@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   resources :suppliers
   resources :brands
   resources :categories
-  resources :products
+  resources :products do
+    member do
+      delete :delete_image_attachment
+    end
+  end
   resources :orders do
     member do
       get :preview
@@ -18,5 +22,7 @@ Rails.application.routes.draw do
   delete "products/remove_from_cart/:id", to: "products#remove_from_cart", as: "remove_from_cart"
   root to: 'orders#index'
 
-  match '*unmatched', to: 'application#route_not_found', via: :all
+  match '*unmatched', to: 'application#route_not_found', via: :all, constraints: lambda { |req|
+    req.path.exclude? 'rails/active_storage'
+  }
 end

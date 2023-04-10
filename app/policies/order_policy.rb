@@ -25,7 +25,15 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def destroy?
-    edit?
+    @user.Admin?
+  end
+
+  def download?
+    index?
+  end
+
+  def preview?
+    index?
   end
 	
 end

@@ -6,7 +6,7 @@ class Admin < ApplicationRecord
   
   enum role: { Admin: 0, Cashier: 1 }
   validates :role, presence: true
-  validates :username, presence: true
+  validates :username, presence: true, length: { maximum: 20 }
   validates :phone,
             format: { with: /\A((\+92)?(0092)?(92)?(0)?)(3)([0-9]{9})\z/,
                       message: 'number is invalid. Please enter again' }

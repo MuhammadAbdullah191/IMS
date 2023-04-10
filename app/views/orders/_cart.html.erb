@@ -29,6 +29,9 @@
         <% end %>
       </tbody>
     </table>
+    <div id="total-price" class="text-center">
+      Total Price: <%= @cart.sum { |product| product.price } %>
+    </div>
     <%= f.submit "Place Order", class: 'btn btn-dark m-1' %>
     <hr>
   </div>

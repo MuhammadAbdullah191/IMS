@@ -21,6 +21,7 @@
                 <th scope="col">Email</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Address</th>
+                <th scope="col">Image</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -32,6 +33,13 @@
                   <td><%= supplier.email %></td>
                   <td><%= supplier.phone %></td>
                   <td><%= supplier.address %></td>
+                  <td class= 'text-center w-25'>
+                    <% if supplier.image.attached? %>
+                      <%= image_tag supplier.image, class: 'w-50 rounded' %>
+                    <% else %>
+                      <p>N/A</p>
+                    <% end %>
+                  </td>
                   <td class="text-center">
                     <%= link_to supplier_path(supplier), class: "btn btn-primary"  do %>
                       <i class="fas fa-eye"></i>
@@ -42,9 +50,12 @@
                     <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, supplier_path(supplier), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
                   </td>
                 </tr>
-              <%end %>
+              <% end %>
             </tbody>
           </table>
+          <div class='p-3'>
+            <%= paginate @suppliers %>
+          </div>
           <div class="text-center">
             <%= link_to "Create New Supplier", new_supplier_path, class: "btn btn-success" %>
           </div>

@@ -1,19 +1,21 @@
 class AdminsController < ApplicationController
-  before_action :set_admin, only: [:edit, :update, :destroy]
+  before_action :set_admin, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user
 
   def index
     @admins = Admin.all
-    authorize @admins
+    @admins = @admins.all.page(params[:page]).per(6)
   end
 
   def new
     @admin = Admin.new
-    authorize @admin
+  end
+
+  def show
   end
 
   def create
     @admin = Admin.new(admin_params)
-    authorize @admin
 
     if @admin.save
       flash[:success] = 'User Create Successfully'
@@ -40,23 +42,31 @@ class AdminsController < ApplicationController
   end
 
   def destroy
-    @admin.destroy
-    flash[:success] = 'User Deleted Successfully'
+    if @admin.destroy
+      flash[:success] = 'User Deleted Successfully'
+    else
+      flash[:danger] = @admin.errors.full_messages.to_sentence
+    end
+    
     redirect_to admins_path
   end
 
-  def dashboard
-  end
-
   private
+
+  def authorize_user
+    authorize Admin
+  end
   
   def admin_params
     params.require(:admin).permit(:email, :password, :password_confirmation, :role, :username, :phone)
   end
 
   def set_admin
-    @admin = Admin.find(params[:id])
-    authorize @admin
+    @admin = Admin.find_by_id(params[:id])
+    if @admin.blank?
+      flash[:danger] = 'Admin Record Not Found'
+      redirect_to admins_path
+    end
   end
 
 end

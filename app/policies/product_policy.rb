@@ -27,5 +27,17 @@ class ProductPolicy < ApplicationPolicy
   def destroy?
     edit?
   end
+  
+  def add_to_cart?
+    index?
+  end
+
+  def remove_from_cart?
+    index?
+  end
+
+  def delete_image_attachment?
+    index?
+  end
 	
 end
