@@ -1,22 +1,22 @@
 class AdminPolicy < ApplicationPolicy
 
-	def index?
-		@user.Admin?
-	end
+  def index?
+    @user.Admin?
+  end
 
-	def new?
+  def new?
     index?
-	end
+  end
 
-	def show?
-		index?
-	end
+  def show?
+    index?
+  end
 
-	def create?
+  def create?
     new?
-	end
+  end
 
-	def edit?
+  def edit?
     new?
   end
 
@@ -24,7 +24,7 @@ class AdminPolicy < ApplicationPolicy
     edit?
   end
 
-	def destroy?
+  def destroy?
     edit?
   end
 	
