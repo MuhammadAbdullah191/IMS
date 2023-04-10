@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:edit, :update, :show, :destroy]
+  before_action :attach_image, only: [:update]
   before_action :authorize_user
 
   def index
@@ -20,7 +21,7 @@ class ProductsController < ApplicationController
 
     if @product.save
       flash[:success] = 'Product Created Successfully'
-      redirect_to products_path
+      redirect_to product_path(@product)
     else
       flash[:danger] = @product.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
@@ -32,19 +33,14 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if params[:product][:image].present?
-      @product.image.attach(params[:product][:image])
-    elsif !@product.image.attached?
-      @product.image.attach(@product.image.blob)
-    end
-    
     if @product.update(product_params)
       flash[:success] = 'Product Updated Successfully'
-      redirect_to products_path
+      redirect_to product_path(@product)
     else
       flash[:danger] = @product.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
     end
+
   end
 
   def destroy
@@ -53,8 +49,8 @@ class ProductsController < ApplicationController
     else
       flash[:danger] = @product.errors.full_messages.to_sentence
     end
-
       redirect_to products_path
+      
   end
 
   def add_to_cart
@@ -94,6 +90,15 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:name, :stock, :description, :price, :location_name, :brand_id, :category_id, :supplier_id)
+  end
+
+  def attach_image
+    if params[:product][:image].present?
+      @product.image.attach(params[:product][:image])
+    elsif !@product.image.attached? && @product.image.present?
+      @product.image.attach(@product.image.blob)
+    end
+    
   end
   
 end

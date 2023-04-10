@@ -42,8 +42,12 @@ class AdminsController < ApplicationController
   end
 
   def destroy
-    @admin.destroy
-    flash[:success] = 'User Deleted Successfully'
+    if @admin.destroy
+      flash[:success] = 'User Deleted Successfully'
+    else
+      flash[:danger] = @admin.errors.full_messages.to_sentence
+    end
+    
     redirect_to admins_path
   end
 

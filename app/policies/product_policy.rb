@@ -35,5 +35,9 @@ class ProductPolicy < ApplicationPolicy
   def remove_from_cart?
     index?
   end
+
+  def delete_image_attachment?
+    index?
+  end
 	
 end

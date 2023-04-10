@@ -1,5 +1,6 @@
 class BrandsController < ApplicationController
   before_action :set_brand, only: [:show, :edit, :update, :destroy]
+  before_action :attach_image, only: [:update]
   before_action :authorize_user
 
   def index
@@ -20,7 +21,7 @@ class BrandsController < ApplicationController
 
     if @brand.save
       flash[:success] = 'Brand Created Successfully'
-      redirect_to brands_path
+      redirect_to brand_path(@brand)
     else
       flash[:danger] = @brand.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
@@ -31,15 +32,9 @@ class BrandsController < ApplicationController
   end
 
   def update
-    if params[:brand][:image].present?
-      @brand.image.attach(params[:brand][:image])
-    elsif !@brand.image.attached?
-      @brand.image.attach(@brand.image.blob)
-    end
-
     if @brand.update(brand_params)
       flash[:success] = 'Brand Updated Successfully'
-      redirect_to brands_path
+      redirect_to brand_path(@brand)
     else
       flash[:danger] = @brand.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
@@ -72,6 +67,15 @@ class BrandsController < ApplicationController
 
   def brand_params
     params.require(:brand).permit(:name, :description, :image)
+  end
+
+  def attach_image
+    if params[:brand][:image].present?
+      @brand.image.attach(params[:brand][:image])
+    elsif !@brand.image.attached? && @brand.image.present?
+      @brand.image.attach(@brand.image.blob)
+    end
+
   end
 
 end
