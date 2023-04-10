@@ -20,6 +20,10 @@ class PdfCreator
       table_data << [item.description, item.price, item.quantity, item.price ]
     end
     @pdf.table table_data, header: true, position: :center, width: 500
+    @pdf.move_down 20
+
+    @pdf.text "Total Price: $#{@order.order_items.sum { |item| item.price }}", size: 18, style: :bold, align: :center
+
 		@pdf
     rescue ActiveRecord::RecordNotUnique => e
      # handle duplicate entry
