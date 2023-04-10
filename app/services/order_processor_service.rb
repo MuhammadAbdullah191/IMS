@@ -1,27 +1,28 @@
 class OrderProcessorService
   attr_reader :order_params
 
-	def initialize(order_params)
+  def initialize(order_params)
     @order_params = order_params
   end
 
-	def process_order
-		@order = Order.new
-		ActiveRecord::Base.transaction do
-      begin
-        ensure_valid_products!
-        @order.save!
-        process_products!
-				return @order
+  def process_order
+    @order = Order.new
+    ActiveRecord::Base.transaction do
+    begin
+      ensure_valid_products!
+      @order.save!
+      process_products!
+      return @order
       rescue ArgumentError => e
         raise ActiveRecord::Rollback
       end
     end
-	end
+    
+  end
 
-	private
+  private
 
-	def ensure_valid_products!
+  def ensure_valid_products!
     raise ArgumentError.new("No products specified") unless @order_params[:product].present?
     @order_params[:product].each do |product_id, quantity|
       product = Product.find_by(id: product_id)
@@ -31,14 +32,14 @@ class OrderProcessorService
     end
   end
 
-	def process_products!
+  def process_products!
     @order_params[:product].each do |product_id, quantity|
       product = Product.find_by_id(product_id)
       @order.order_items.create(
-        product_id: product_id,
-        description: product.name,
-        quantity: quantity,
-        price: quantity.to_i * product.price
+      product_id: product_id,
+      description: product.name,
+      quantity: quantity,
+      price: quantity.to_i * product.price
       )
       product.stock -= quantity.to_i
       product.save!
