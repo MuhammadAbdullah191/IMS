@@ -10,6 +10,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "chart.js": "^4.2.1",
     "chartkick": "^5.0.1",
+    "chosen-js": "^1.8.7",
     "jquery": "^3.6.4",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",

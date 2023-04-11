@@ -25,8 +25,12 @@
             <td><%= @product.location_name %></td>
           </tr>
           <tr>
-            <th>Supplier ID</th>
-            <td><%= @product.supplier_id %></td>
+            <th>Suppliers</th>
+            <td>
+                <% @product.suppliers.each do |supplier| %>
+                  - <%= supplier.name %><br>
+                <% end %>
+              </td>
           </tr>
           <tr>
             <tr>
@@ -34,8 +38,12 @@
               <td><%= @product.brand_id %></td>
             </tr>
             <tr>
-              <th>Category ID</th>
-              <td><%= @product.category_id %></td>
+              <th>Categories</th>
+              <td>
+                <% @product.categories.each do |category| %>
+                  - <%= category.title %><br>
+                <% end %>
+              </td>
             </tr>
             <tr>
               <th>Created At</th>

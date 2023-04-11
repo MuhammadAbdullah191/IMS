@@ -1,5 +1,6 @@
 class Supplier < ApplicationRecord
   has_one_attached :image, dependent: :destroy
+  has_and_belongs_to_many :products
 	
   validates :name, presence: true, length: { maximum: 20 }
   validates :email, uniqueness: true, format: { with: Devise.email_regexp }

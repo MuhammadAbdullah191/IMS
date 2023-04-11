@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_09_091923) do
+ActiveRecord::Schema.define(version: 2023_04_11_032058) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -48,15 +48,6 @@ ActiveRecord::Schema.define(version: 2023_04_09_091923) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "suppliers", force: :cascade do |t|
-    t.string "name", default: "", null: false
-    t.string "email", default: "", null: false
-    t.string "phone", default: "", null: false
-    t.string "address", default: "", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_suppliers_on_email", unique: true
-  end
   create_table "brands", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.text "description", default: "", null: false
@@ -71,6 +62,13 @@ ActiveRecord::Schema.define(version: 2023_04_09_091923) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["title"], name: "index_categories_on_title", unique: true
+  end
+
+  create_table "categories_products", id: false, force: :cascade do |t|
+    t.integer "product_id", null: false
+    t.integer "category_id", null: false
+    t.index ["category_id", "product_id"], name: "index_categories_products_on_category_id_and_product_id"
+    t.index ["product_id", "category_id"], name: "index_categories_products_on_product_id_and_category_id"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -98,20 +96,31 @@ ActiveRecord::Schema.define(version: 2023_04_09_091923) do
     t.integer "price", default: 0, null: false
     t.string "location_name", default: "", null: false
     t.integer "brand_id", null: false
-    t.integer "category_id", null: false
-    t.integer "supplier_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["brand_id"], name: "index_products_on_brand_id"
-    t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["name"], name: "index_products_on_name", unique: true
-    t.index ["supplier_id"], name: "index_products_on_supplier_id"
+  end
+
+  create_table "products_suppliers", id: false, force: :cascade do |t|
+    t.integer "product_id", null: false
+    t.integer "supplier_id", null: false
+    t.index ["product_id", "supplier_id"], name: "index_products_suppliers_on_product_id_and_supplier_id"
+    t.index ["supplier_id", "product_id"], name: "index_products_suppliers_on_supplier_id_and_product_id"
+  end
+
+  create_table "suppliers", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "email", default: "", null: false
+    t.string "phone", default: "", null: false
+    t.string "address", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_suppliers_on_email", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "products", "brands"
-  add_foreign_key "products", "categories"
-  add_foreign_key "products", "suppliers"
 end
