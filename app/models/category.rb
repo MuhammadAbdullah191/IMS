@@ -4,4 +4,5 @@ class Category < ApplicationRecord
 
   validates :title, presence: true, uniqueness: true, length: { maximum: 20 }
   validates :description, presence: true, length: { maximum: 50 }
+  validates :image, content_type: /\Aimage\/.*\z/
 end

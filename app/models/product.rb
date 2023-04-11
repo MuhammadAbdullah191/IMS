@@ -11,4 +11,5 @@ class Product < ApplicationRecord
   validates :price, numericality: { greater_than_or_equal_to: 1 }
   validates :categories, presence: true
   validates :suppliers, presence: true
+  validates :image, content_type: /\Aimage\/.*\z/
 end

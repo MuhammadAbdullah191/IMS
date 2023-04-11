@@ -74,3 +74,5 @@ gem 'kaminari', '~> 1.2.1'
 gem 'jquery-rails'
 
 gem 'chosen-rails'
+
+gem 'active_storage_validations'
