@@ -4,7 +4,7 @@
   <td><%= product.price %></td>
   <td><%= product.brand.name %></td>
   <td><% product.categories.each do |category| %>
-      - <%= category.title %><br>
+      - <%= category.name %><br>
     <% end %></td>
   <td><%= product.location_name %></td>
   <td>

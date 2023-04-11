@@ -5,8 +5,8 @@
   <div class="text-center">
     <%= search_form_for @q, url: categories_path do |f| %>
       <div class = 'p-2'>
-        <%= f.label :title_or_description_cont %>
-        <%= f.search_field :title_or_description_cont, placeholder: 'title or desc contains' %>
+        <%= f.label :name_or_description_cont %>
+        <%= f.search_field :name_or_description_cont, placeholder: 'name or desc contains' %>
         <%= f.submit %>
       <% end %>
     </div>
@@ -17,7 +17,7 @@
             <thead>
               <tr>
                 <th scope="col">Sr. No</th>
-                <th scope="col">Title</th>
+                <th scope="col">Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Image</th>
                 <th scope="col" class="col-2">Actions</th>
@@ -27,7 +27,7 @@
               <% @categories.each_with_index do |category,index| %>
                 <tr>
                   <th scope="row"><%= index+1 %></th>
-                  <td><%= category.title %></td>
+                  <td><%= category.name %></td>
                   <td><%= category.description %></td>
                   <td class= 'text-center w-25'>
                     <% if category.image.attached? %>

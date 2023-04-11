@@ -18,7 +18,7 @@
   </div>
   <div class="field form-group d-flex flex-column py-2">
     <%= f.label :images %>
-    <% if supplier.image.attached? && supplier.image.blob.image? %>
+    <% if supplier.image.attached? && supplier.image.blob.image? && supplier.image.id.present? %>
       <%= image_tag supplier.image, class: 'w-25 rounded m-3 ' %>
       <%= link_to 'Remove', delete_image_attachment_product_url(supplier.image.id),
                 method: :delete,

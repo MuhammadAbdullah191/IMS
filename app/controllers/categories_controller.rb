@@ -70,7 +70,7 @@ class CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:category).permit(:title, :description, :image)
+    params.require(:category).permit(:name, :description, :image)
   end
 
   def attach_image

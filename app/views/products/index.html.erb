@@ -30,14 +30,14 @@
                 <td class= 'text-center w-25'>
                   <% if product.image.attached? %>
                     <%= image_tag product.image, class: 'w-50 rounded' %>
-                  <% else%>
+                  <% else %>
                     <p>N/A</p>
                   <% end %>
                 </td>
                 <td><%= product.brand.name %></td>
                 <td>
                   <% product.categories.each do |category| %>
-                    - <%= category.title %><br>
+                    - <%= category.name %><br>
                   <% end %>
                 </td>
                 <td><%= product.price %></td>

@@ -29,11 +29,11 @@
   </div>
   <div class="field form-group d-flex flex-column py-2">
     <%= f.label :Select_Categories %>
-    <%= f.select :category_ids, Category.all.collect {|c| [c.title, c.id]}, {}, {multiple: true, class: 'chosen-select form-control'} %>
+    <%= f.select :category_ids, Category.all.collect {|c| [c.name, c.id]}, {}, {multiple: true, class: 'chosen-select form-control'} %>
   </div>
   <div class="field form-group d-flex flex-column py-2">
     <%= f.label :images %>
-    <% if product.image.attached? && product.image.blob.image? %>
+    <% if product.image.attached? && product.image.blob.image? && product.image.id.present? %>
       <%= image_tag product.image, class: 'w-25 rounded m-3 ' %>
       <%= link_to 'Remove', delete_image_attachment_product_url(product.image.id),
                 method: :delete,
