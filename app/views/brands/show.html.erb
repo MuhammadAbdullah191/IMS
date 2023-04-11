@@ -31,6 +31,8 @@
     <div class="col-md-6 text-center">
       <% if @brand.image.attached? %>
         <%= image_tag @brand.image, class: 'w-50 rounded m-5' %>
+      <% else %>
+        <img src="/assets/Image_not_available.png" alt="image not available"  class='w-50 h-75 rounded m-5'>
       <% end %>
     </div>
   </div>

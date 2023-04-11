@@ -16,10 +16,9 @@
               <th scope="col">Stock</th>
               <th scope="col">Image</th>
               <th scope="col">Brand</th>
-              <th scope="col">Category</th>
+              <th scope="col">Categories</th>
               <th scope="col">Price</th>
-              <th scope="col">Location Name</th>
-              <th scope="col">Actions</th>
+              <th scope="col" class="col-2">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -31,14 +30,17 @@
                 <td class= 'text-center w-25'>
                   <% if product.image.attached? %>
                     <%= image_tag product.image, class: 'w-50 rounded' %>
-                  <% else%>
+                  <% else %>
                     <p>N/A</p>
                   <% end %>
                 </td>
                 <td><%= product.brand.name %></td>
-                <td><%= product.category.title %></td>
+                <td>
+                  <% product.categories.each do |category| %>
+                    - <%= category.name %><br>
+                  <% end %>
+                </td>
                 <td><%= product.price %></td>
-                <td><%= product.location_name %></td>
                 <td class="text-center">
                   <%= link_to product_path(product), class: "btn btn-dark"  do %>
                     <i class="fas fa-eye"></i>

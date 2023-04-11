@@ -1,4 +1,4 @@
- <%= form_with model: product , local: true do |f| %>
+ <%= form_with model: product , local: true, validate: true do |f| %>
   <div class= "form-group">
     <label for= "inputAddress">Name</label>
     <%= f.text_field :name, class: 'form-control' %>
@@ -20,20 +20,20 @@
     <%= f.text_field :location_name, class: 'form-control' %>
   </div>
   <div class="field form-group d-flex flex-column py-2">
-    <%= f.label :supplier_id %>
-    <%= f.select :supplier_id, Supplier.all.collect {|x| [x.name, x.id]}, { include_blank: true },class: "form-control" %>
+    <%= f.label :Select_suppliers %>
+    <%= f.select :supplier_ids, Supplier.all.collect {|c| [c.name, c.id]}, {}, {multiple: true, class: 'chosen-select form-control'} %>
   </div>
   <div class="field form-group d-flex flex-column py-2">
     <%= f.label :brand_id %>
     <%= f.select :brand_id, Brand.all.collect {|x| [x.name, x.id]}, { include_blank: true },class: "form-control" %>
   </div>
   <div class="field form-group d-flex flex-column py-2">
-    <%= f.label :category_id %>
-    <%= f.select :category_id, Category.all.collect {|x| [x.title, x.id]}, { include_blank: true },class: "form-control" %>
+    <%= f.label :Select_Categories %>
+    <%= f.select :category_ids, Category.all.collect {|c| [c.name, c.id]}, {}, {multiple: true, class: 'chosen-select form-control'} %>
   </div>
   <div class="field form-group d-flex flex-column py-2">
     <%= f.label :images %>
-    <% if product.image.attached? %>
+    <% if product.image.attached? && product.image.blob.image? && product.image.id.present? %>
       <%= image_tag product.image, class: 'w-25 rounded m-3 ' %>
       <%= link_to 'Remove', delete_image_attachment_product_url(product.image.id),
                 method: :delete,

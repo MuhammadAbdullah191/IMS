@@ -1,6 +1,6 @@
 <div class="container m-3">
   <div class="row">
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-6">
       <h2>Supplier Details</h2>
       <table class="table">
         <tbody>
@@ -17,8 +17,12 @@
             <td><%= @supplier.address %></td>
           </tr>
           <tr>
-            <th>Phone</th>
+            <th>Email</th>
             <td><%= @supplier.email %></td>
+          </tr>
+          <tr>
+            <th>Phone</th>
+            <td><%= @supplier.phone %></td>
           </tr>
           <tr>
             <th>Created At</th>
@@ -31,6 +35,13 @@
         </tbody>
       </table>
       <%= link_to "Back to Suppliers", suppliers_path, class: "btn btn-secondary" %>
+    </div>
+    <div class="col-md-6 text-center">
+      <% if @supplier.image.attached? %>
+        <%= image_tag @supplier.image, class: 'w-50 rounded m-5' %>
+      <% else %>
+        <img src="/assets/Image_not_available.png" alt="image not available"  class='w-50 h-75 rounded m-5'>
+      <% end %>
     </div>
   </div>
 </div>

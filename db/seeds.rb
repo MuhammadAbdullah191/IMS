@@ -16,9 +16,9 @@ Brand.create(name: 'Brand 1', description:"Brand 1 Description", created_at: Tim
 Brand.create(name: 'Brand 3', description:"Brand 3 Description", created_at: Time.now, updated_at: Time.now )
 Brand.create(name: 'Brand 2', description:"Brand 2 Description", created_at: Time.now, updated_at: Time.now )
 
-Category.create(title: 'Category 2', description:"Category 2 Description", created_at: Time.now, updated_at: Time.now )
-Category.create(title: 'Category 1', description:"Category 1 Description", created_at: Time.now, updated_at: Time.now )
-Category.create(title: 'Category 3', description:"Category 3 Description", created_at: Time.now, updated_at: Time.now )
+Category.create(name: 'Category 2', description:"Category 2 Description", created_at: Time.now, updated_at: Time.now )
+Category.create(name: 'Category 1', description:"Category 1 Description", created_at: Time.now, updated_at: Time.now )
+Category.create(name: 'Category 3', description:"Category 3 Description", created_at: Time.now, updated_at: Time.now )
 
 Product.create(name: "Example Product", stock: 10, description: "This is an example product description.", price: 20, location_name: "Example Location", brand_id: 1, category_id: 1, supplier_id: 2, created_at: Time.now, updated_at: Time.now )
 Product.create(name: "Product 1", stock: 15, description: "This is a product description.", price: 50, location_name: "Location 1", brand_id: 2, category_id: 2, supplier_id: 4, created_at: Time.now, updated_at: Time.now)
@@ -48,11 +48,11 @@ Brand.create(name: "Samsung", description: "Technology and electronics brand", c
 Brand.create(name: "Toyota", description: "Automobile brand", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
 
 # Seed Categories
-Category.create(title: "Men's Clothing", description: "Clothing for men", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
-Category.create(title: "Women's Clothing", description: "Clothing for women", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
-Category.create(title: "Electronics", description: "Electronic devices and accessories", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
-Category.create(title: "Sports Equipment", description: "Equipment for sports and fitness", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
-Category.create(title: "Home Appliances", description: "Appliances for home use", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
+Category.create(name: "Men's Clothing", description: "Clothing for men", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
+Category.create(name: "Women's Clothing", description: "Clothing for women", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
+Category.create(name: "Electronics", description: "Electronic devices and accessories", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
+Category.create(name: "Sports Equipment", description: "Equipment for sports and fitness", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
+Category.create(name: "Home Appliances", description: "Appliances for home use", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
 
 brands = Brand.all
 categories = Category.all
@@ -94,57 +94,33 @@ Order.create(consumer_name: "Daniel Martin", created_at: (rand(6.days.ago..Time.
 Order.create(consumer_name: "Mia Johnson", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
 Order.create(consumer_name: "Ethan Lee", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
 
-# OrderItem 1
 OrderItem.create(quantity: 2, description: "Wireless Earbuds", price: 899, product: Product.all.sample, order: Order.all.sample)
-
-# OrderItem 2
 OrderItem.create(quantity: 1, description: "Gaming Mouse", price: 699, product: Product.all.sample, order: Order.all.sample)
-
-# OrderItem 3
 OrderItem.create(quantity: 3, description: "Bluetooth Speaker", price: 1299, product: Product.all.sample, order: Order.all.sample)
-
-# OrderItem 4
 OrderItem.create(quantity: 2, description: "Smart Watch", price: 1999, product: Product.all.sample, order: Order.all.sample)
-
-# OrderItem 5
 OrderItem.create(quantity: 1, description: "Wireless Charger", price: 399, product: Product.all.sample, order: Order.all.sample)
-
-# OrderItem 6
 OrderItem.create(quantity: 4, description: "External Hard Drive", price: 1499, product: Product.all.sample, order: Order.all.sample)
-
-# OrderItem 7
 OrderItem.create(quantity: 1, description: "Mechanical Keyboard", price: 1299, product: Product.all.sample, order: Order.all.sample)
-
-# OrderItem 8
 OrderItem.create(quantity: 2, description: "Noise Cancelling Headphones", price: 2499, product: Product.all.sample, order: Order.all.sample)
-
-# OrderItem 9
 OrderItem.create(quantity: 1, description: "Smart Thermostat", price: 1799, product: Product.all.sample, order: Order.all.sample)
-
-# OrderItem 10
 OrderItem.create(quantity: 3, description: "Fitness Tracker", price: 999, product: Product.all.sample, order: Order.all.sample)
-
-# OrderItem 11
 OrderItem.create(quantity: 1, description: "Wireless Earphones", price: 1199, product: Product.all.sample, order: Order.all.sample)
-
-# OrderItem 12
 OrderItem.create(quantity: 2, description: "Gaming Keyboard", price: 899, product: Product.all.sample, order: Order.all.sample)
-
-# OrderItem 13
 OrderItem.create(quantity: 1, description: "Smart Speaker", price: 1499, product: Product.all.sample, order: Order.all.sample)
-
-# OrderItem 14
 OrderItem.create(quantity: 3, description: "Power Bank", price: 599, product: Product.all.sample, order: Order.all.sample)
-
-# OrderItem 15
 OrderItem.create(quantity: 2, description: "Gaming Headset", price: 1299, product: Product.all.sample, order: Order.all.sample)
-
-# OrderItem 16
 OrderItem.create(quantity: 1, description: "Smart Lock", price: 2199, product: Product.all.sample, order: Order.all.sample)
-
-# OrderItem 17
 OrderItem.create(quantity: 4, description: "USB-C Hub", price: 799, product: Product.all.sample, order: Order.all.sample)
-
-# OrderItem 18
 OrderItem.create(quantity: 1, description: "Wireless Mouse", price: 499, product: Product.all.sample, order: Order.all.sample)
 
+categories = Category.all
+
+Product.find_each do |product|
+  product.categories << categories.sample(rand(1..3))
+end
+
+supplier = Supplier.all
+
+Product.find_each do |product|
+  product.suppliers << supplier.sample(rand(1..3))
+end

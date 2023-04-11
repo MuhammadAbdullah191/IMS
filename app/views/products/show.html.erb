@@ -25,8 +25,12 @@
             <td><%= @product.location_name %></td>
           </tr>
           <tr>
-            <th>Supplier ID</th>
-            <td><%= @product.supplier_id %></td>
+            <th>Suppliers</th>
+            <td>
+              <% @product.suppliers.each do |supplier| %>
+                - <%= supplier.name %><br>
+              <% end %>
+            </td>
           </tr>
           <tr>
             <tr>
@@ -34,8 +38,12 @@
               <td><%= @product.brand_id %></td>
             </tr>
             <tr>
-              <th>Category ID</th>
-              <td><%= @product.category_id %></td>
+              <th>Categories</th>
+              <td>
+                <% @product.categories.each do |category| %>
+                  - <%= category.name %><br>
+                <% end %>
+              </td>
             </tr>
             <tr>
               <th>Created At</th>
@@ -52,6 +60,8 @@
       <div class="col-md-6 text-center">
         <% if @product.image.attached? %>
           <%= image_tag @product.image, class: 'w-50 rounded m-5' %>
+        <% else %>
+          <img src="/assets/Image_not_available.png" alt="image not available"  class='w-50 h-75 rounded m-5'>
         <% end %>
       </div>
     </div>

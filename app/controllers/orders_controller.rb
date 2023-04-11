@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @q = Product.ransack(params[:q])
-    @products = @q.result(distinct: true).all.page(params[:page]).per(6)
+    @products = @q.result(distinct: true).all.page(params[:page]).per(10)
   end
 
   def show
