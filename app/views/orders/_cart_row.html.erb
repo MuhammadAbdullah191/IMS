@@ -6,6 +6,6 @@
   <td id="total-price-<%= product.id %>"><%= product.price %></td>
   <td><%= product.location_name %></td>
   <td>
-    <%= button_to "Remove From Cart", nil, remote: true, data: { product_id: product.id }, class:'remove-from-cart-button' %>
+    <%= button_to "Remove From Cart", nil, remote: true, data: { product_id: product.id }, class:'remove-from-cart-button btn btn-outline-danger' %>
   </td>
 </tr>

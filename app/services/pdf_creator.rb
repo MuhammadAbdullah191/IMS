@@ -1,6 +1,6 @@
 class PdfCreator
-  def initialize(id)
-    @order = Order.find_by_id(id)
+  def initialize(order_params)
+    @order = order_params[:order]
   end
 
   def create_pdf

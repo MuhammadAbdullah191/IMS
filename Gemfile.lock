@@ -107,6 +107,8 @@ GEM
       warden (~> 1.2.3)
     erubi (1.12.0)
     execjs (2.8.1)
+    faker (3.1.1)
+      i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
@@ -340,6 +342,7 @@ DEPENDENCIES
   chosen-rails
   client_side_validations
   devise
+  faker
   groupdate
   image_processing (~> 1.2)
   jbuilder (~> 2.7)

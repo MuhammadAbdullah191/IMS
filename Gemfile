@@ -86,3 +86,5 @@ gem 'chosen-rails'
 gem 'active_storage_validations'
 
 gem 'client_side_validations'
+
+gem 'faker'

@@ -7,11 +7,13 @@
             <span class="fs-5 d-none d-sm-inline">Menu</span>
           </a>
           <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+            <% if current_admin.Admin? %>
             <li class="nav-item d-flex align-items-center">
               <a href="#" class="nav-link align-middle px-0 text-white">
                 <i class="fa-solid fa-house"></i><%= link_to "Users", admins_path, class: "text-decoration-none ms-2 text-white" %>
               </a>
             </li>
+            <% end %>
             <li class="nav-item d-flex align-items-center">
               <a href="#" class="nav-link align-middle px-0 text-white">
                 <i class="fa-solid fa-table-cells-large"></i><%= link_to "Products", products_path, class: " text-decoration-none ms-2 text-white" %>

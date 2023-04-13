@@ -16,7 +16,6 @@ class AdminsController < ApplicationController
 
   def create
     @admin = Admin.new(admin_params)
-
     if @admin.save
       flash[:success] = 'User Create Successfully'
       redirect_to admins_path
@@ -67,6 +66,7 @@ class AdminsController < ApplicationController
       flash[:danger] = 'Admin Record Not Found'
       redirect_to admins_path
     end
+    
   end
 
 end

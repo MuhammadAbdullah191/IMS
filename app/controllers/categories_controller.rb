@@ -33,7 +33,6 @@ class CategoriesController < ApplicationController
   end
 
   def update
-
     if @category.update(category_params)
       flash[:success] = 'Category Updated Successfully'
       redirect_to category_path(@category)
@@ -50,6 +49,7 @@ class CategoriesController < ApplicationController
     else
       flash[:danger] = @category.errors.full_messages.to_sentence
     end
+    
     redirect_to categories_path
   end
 
@@ -81,4 +81,5 @@ class CategoriesController < ApplicationController
     end
     
   end
+  
 end

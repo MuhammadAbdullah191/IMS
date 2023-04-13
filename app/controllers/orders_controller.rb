@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_pdf, only: [:download, :preview]
+  before_action :set_pdf, only: [:download]
   before_action :set_order, only: [:show, :destroy]
   before_action :check_cart, only: [:create]
   before_action :check_params, only: [:create]
@@ -20,11 +20,11 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = OrderProcessorService.new(params).process_order
+    @order = OrderProcessorService.new(product: params[:product]).process_order
     if @order.present?
       session[:cart] = []
       flash[:success] = 'Order was successfully created.'
-      redirect_to preview_order_path(@order)
+      redirect_to order_path(@order)
     else
       flash[:danger] = 'Unable to create order please try again'
       render :new, status: :unprocessable_entity
@@ -44,16 +44,8 @@ class OrdersController < ApplicationController
 
   def download
     send_data(@pdf.render,
-      filename: 'hello.pdf',
+      filename: "order##{@order.id}.pdf",
       type: 'application/pdf'
-    )
-  end
-
-  def preview
-    send_data(@pdf.render,
-      filename: 'hello.pdf',
-      type: 'application/pdf',
-      disposition: 'inline'
     )
   end
   
@@ -68,6 +60,7 @@ class OrdersController < ApplicationController
     if params[:q][:created_at_lteq].present?
       params[:q][:created_at_lteq] = params[:q][:created_at_lteq].to_date.end_of_day
     end
+
   end
 
   def set_order
@@ -76,19 +69,27 @@ class OrdersController < ApplicationController
       flash[:danger] = 'Record Not Found'
       redirect_to orders_path
     end
+    
   end
 
   def set_pdf
     @order = Order.find_by_id(params[:id])
-    @pdf = PdfCreator.new(params[:id]).create_pdf
+    if @order.present?
+      @pdf = PdfCreator.new(order: @order).create_pdf
+    else
+      flash[:danger] = 'Record Not Found'
+      redirect_to orders_path
+    end
+
   end
 
   def check_cart
-    if session[:cart].empty?
+    if session[:cart].blank?
       flash[:danger] = 'Please select atlease one product to create order'
       redirect_to new_order_path
       return
     end
+
   end
 
   def order_params

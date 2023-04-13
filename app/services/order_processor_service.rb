@@ -27,7 +27,6 @@ class OrderProcessorService
     @order_params[:product].each do |product_id, quantity|
       product = Product.find_by(id: product_id)
       raise ArgumentError.new("Invalid product ID: #{product_id}") unless product.present?
-      raise ArgumentError.new("Invalid quantity for product #{product_id}: #{quantity}") unless quantity.present? && quantity.to_i > 0
       raise ArgumentError.new("Insufficient stock for product #{product_id}") if product.stock.to_i < quantity.to_i
     end
   end
@@ -44,16 +43,7 @@ class OrderProcessorService
       product.stock -= quantity.to_i
       product.save!
     end
-  end
-
-  def calculate_total_price(products)
-    total_price = 0
-    products.each do |product_id, quantity|
-      product = Product.find_by_id(product_id)
-      total_price += product.price * quantity.to_i
-    end
-
-    total_price
+    
   end
 
 end

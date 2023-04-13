@@ -45,3 +45,7 @@
 .pagination a:hover {
   background-color: #ccc;
 }
+
+.message{
+  color: red;
+}

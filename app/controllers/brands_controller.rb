@@ -26,6 +26,7 @@ class BrandsController < ApplicationController
       flash[:danger] = @brand.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
     end
+
   end
 
   def edit
@@ -48,6 +49,7 @@ class BrandsController < ApplicationController
     else
       flash[:danger] = @brand.errors.full_messages.to_sentence
     end
+    
     redirect_to brands_path
   end
 
