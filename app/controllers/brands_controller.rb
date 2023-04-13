@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class BrandsController < ApplicationController
-  before_action :set_brand, only: [:show, :edit, :update, :destroy]
+  before_action :set_brand, only: %i[show edit update destroy]
   before_action :attach_image, only: [:update]
   before_action :authorize_user
 
@@ -12,8 +14,7 @@ class BrandsController < ApplicationController
     @brand = Brand.new
   end
 
-  def show
-  end
+  def show; end
 
   def create
     @brand = Brand.new(brand_params)
@@ -29,8 +30,7 @@ class BrandsController < ApplicationController
 
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @brand.update(brand_params)
@@ -60,11 +60,11 @@ class BrandsController < ApplicationController
   end
 
   def set_brand
-    @brand = Brand.find_by_id(params[:id])
-    if @brand.blank?
-      flash[:danger] = 'Brand Record Not Found'
-      redirect_to brands_path
-    end
+    @brand = Brand.find_by(id: params[:id])
+    return if @brand.present?
+
+    flash[:danger] = 'Brand Record Not Found'
+    redirect_to brands_path
   end
 
   def brand_params

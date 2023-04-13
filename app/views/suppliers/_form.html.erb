@@ -5,7 +5,7 @@
   </div>
   <div class= "field form-group d-flex flex-column">
     <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-text text-muted' %>
+    <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-text text-muted' %>
     <small id= "emailHelp" class= "form-text text-muted">i.e abc@xyz.com</small>
   </div>
   <div class= "form-group">
@@ -14,7 +14,7 @@
   </div>
   <div class="form-group">
     <label for="inputAddress2">Address</label>
-    <%= f.text_field  :address, class: 'form-control', placeholder: '1234 Main St'%>
+    <%= f.text_field :address, class: 'form-control', placeholder: '1234 Main St'%>
   </div>
   <div class="field form-group d-flex flex-column py-2">
     <%= f.label :images %>
@@ -31,7 +31,7 @@
     <%= f.file_field :image %>
   </div>
   <div class="actions py-3">
-    <%= f.submit "Submit", class: 'btn btn-danger' %>
-    <%= link_to "Cancel", suppliers_path, class: "btn btn-secondary" %>
+    <%= f.submit 'Submit', class: 'btn btn-danger' %>
+    <%= link_to 'Cancel', suppliers_path, class: 'btn btn-secondary' %>
   </div>
 <% end %>

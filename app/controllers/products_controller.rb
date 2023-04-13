@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:edit, :update, :show, :destroy]
+  before_action :set_product, only: %i[edit update show destroy]
   before_action :attach_image, only: [:update]
   before_action :authorize_user
 
@@ -12,8 +14,7 @@ class ProductsController < ApplicationController
     @product = Product.new
   end
 
-  def show
-  end
+  def show; end
 
   def create
     @product = Product.new(product_params)
@@ -29,8 +30,7 @@ class ProductsController < ApplicationController
 
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @product.update(product_params)
@@ -49,29 +49,26 @@ class ProductsController < ApplicationController
     else
       flash[:danger] = @product.errors.full_messages.to_sentence
     end
-      redirect_to products_path
-      
+    redirect_to products_path
   end
 
   def add_to_cart
     id = params[:id].to_i
-    unless session[:cart].include?(id)
-      session[:cart] << id
-    end
+    session[:cart] << id unless session[:cart].include?(id)
 
-    render partial: 'orders/cart_row', locals: { product: Product.find_by_id(id) }
+    render partial: 'orders/cart_row', locals: { product: Product.find_by(id: id) }
   end
 
   def remove_from_cart
     id = params[:id].to_i
     session[:cart].delete(id)
-    render partial: 'orders/product_row', locals: { product: Product.find_by_id(id) }
+    render partial: 'orders/product_row', locals: { product: Product.find_by(id: id) }
   end
 
   def delete_image_attachment
-    @image = ActiveStorage::Attachment.find_by_id(params[:id])
+    @image = ActiveStorage::Attachment.find_by(id: params[:id])
     @image.purge
-    redirect_to request.referrer
+    redirect_to request.referer
   end
 
   private
@@ -79,13 +76,13 @@ class ProductsController < ApplicationController
   def authorize_user
     authorize Product
   end
-  
+
   def set_product
-    @product = Product.find_by_id(params[:id])
-    if @product.blank?
-      flash[:danger] = 'Record Not Found'
-      redirect_to products_path
-    end
+    @product = Product.find_by(id: params[:id])
+    return if @product.present?
+
+    flash[:danger] = 'Record Not Found'
+    redirect_to products_path
   end
 
   def product_params
@@ -98,7 +95,7 @@ class ProductsController < ApplicationController
     elsif !@product.image.attached? && @product.image.present?
       @product.image.attach(@product.image.blob)
     end
-    
+
   end
   
 end

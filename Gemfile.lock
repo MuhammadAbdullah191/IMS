@@ -65,6 +65,13 @@ GEM
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
     bcrypt (3.1.18)
+    better_html (2.0.1)
+      actionview (>= 6.0)
+      activesupport (>= 6.0)
+      ast (~> 2.0)
+      erubi (~> 1.4)
+      parser (>= 2.4)
+      smart_properties
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
@@ -251,6 +258,9 @@ GEM
       parser (>= 3.2.1.0)
     rubocop-capybara (2.17.1)
       rubocop (~> 1.41)
+    rubocop-erb (0.2.4)
+      better_html
+      rubocop (~> 1.45)
     rubocop-performance (1.6.1)
       rubocop (>= 0.71.0)
     rubocop-rails (2.6.0)
@@ -279,6 +289,7 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     set (1.0.3)
+    smart_properties (1.17.0)
     sorted_set (1.0.3)
       rbtree
       set (~> 1.0)
@@ -356,6 +367,7 @@ DEPENDENCIES
   rails (~> 6.0.6, >= 6.0.6.1)
   ransack
   rubocop
+  rubocop-erb
   rubocop-performance
   rubocop-rails
   rubocop-rspec

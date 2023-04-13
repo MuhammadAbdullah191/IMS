@@ -28,7 +28,7 @@
           <td><%= item.product.name%></td>
           <td><%= item.product.price%></td>
           <td><%= item.created_at %></td>
-          <td><%= link_to "View", order_item_path(item), class: "btn btn-light" %></td>
+          <td><%= link_to 'View', order_item_path(item), class: 'btn btn-light' %></td>
         </tr>
       <% end %>
     </tbody>

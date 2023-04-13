@@ -36,6 +36,7 @@ gem 'devise'
 
 gem 'rubocop'
 
+gem 'rubocop-erb'
 gem 'rubocop-performance'
 gem 'rubocop-rails'
 gem 'rubocop-rspec'

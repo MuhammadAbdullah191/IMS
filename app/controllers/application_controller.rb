@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   before_action :authenticate_admin!
   before_action :initialize_session
@@ -16,7 +18,7 @@ class ApplicationController < ActionController::Base
   private
 
   def user_not_authorized
-    flash[:danger] = "You are not authorized to perform this action."
+    flash[:danger] = 'You are not authorized to perform this action.'
     redirect_back(fallback_location: root_path)
   end
 
@@ -24,7 +26,7 @@ class ApplicationController < ActionController::Base
     flash[:danger] = 'This record is not found'
     redirect_back(fallback_location: root_path)
   end
-	
+
   def pundit_user
     current_admin
   end
@@ -37,5 +39,5 @@ class ApplicationController < ActionController::Base
     @cart = Product.find(session[:cart])
     @cart ||= []
   end
-	
+
 end

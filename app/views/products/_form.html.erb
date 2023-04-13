@@ -25,11 +25,11 @@
   </div>
   <div class="field form-group d-flex flex-column py-2">
     <%= f.label :brand_id %>
-    <%= f.select :brand_id, Brand.all.collect {|x| [x.name, x.id]}, { include_blank: true },class: "form-control" %>
+    <%= f.select :brand_id, Brand.all.collect { |x| [x.name, x.id] }, { include_blank: true }, class: 'form-control' %>
   </div>
   <div class="field form-group d-flex flex-column py-2">
     <%= f.label :Select_Categories %>
-    <%= f.select :category_ids, Category.all.collect {|c| [c.name, c.id]}, {}, {multiple: true, class: 'chosen-select form-control'} %>
+    <%= f.select :category_ids, Category.all.collect { |c| [c.name, c.id] }, {}, { multiple: true, class: 'chosen-select form-control' } %>
   </div>
   <div class="field form-group d-flex flex-column py-2">
     <%= f.label :images %>
@@ -46,7 +46,7 @@
     <%= f.file_field :image %>
   </div>
   <div class="actions py-3">
-    <%= f.submit "Submit", class: 'btn btn-danger' %>
-    <%= link_to "Cancel", products_path, class: "btn btn-secondary" %>
+    <%= f.submit 'Submit', class: 'btn btn-danger' %>
+    <%= link_to 'Cancel', products_path, class: 'btn btn-secondary' %>
   </div>
 <% end %>

@@ -1,9 +1,9 @@
 <% if current_admin %>
   <nav class="navbar navbar-light bg-light p-3">
-    <%= link_to "Welcome To IMS", root_path, class: "navbar-brand mb-0 h1" %>
+    <%= link_to 'Welcome To IMS', root_path, class: 'navbar-brand mb-0 h1' %>
     <div class = 'd-flex flex-row align-items-center justify-content-center'>
       <p class="label label-warning m-1"><%= current_admin.role %> </p>
-      <%= button_to "logout", destroy_admin_session_path, class:"btn btn-danger", method: :delete %>
+      <%= button_to 'logout', destroy_admin_session_path, class: 'btn btn-danger', method: :delete %>
     </div>
   </nav>
 <% end %>
