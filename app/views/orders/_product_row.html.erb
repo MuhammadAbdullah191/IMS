@@ -6,7 +6,7 @@
   <td><% product.categories.each do |category| %>
       - <%= category.name %><br>
     <% end %></td>
-  <td><%= product.location_name %></td>
+  <td><%= product.location_name.present? ? product.location_name : 'N/A' %></td>
   <td>
     <%= button_to 'Add to cart', nil, remote: true, method: :post, data: { product_id: product.id }, class: 'add-to-cart-button btn btn-outline-dark' %>
   </td>

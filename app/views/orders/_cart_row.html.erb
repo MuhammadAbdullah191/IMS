@@ -4,7 +4,7 @@
   <td><%= product.stock %></td>
   <td id="product-price-<%= product.id %>"><%= product.price %></td>
   <td id="total-price-<%= product.id %>"><%= product.price %></td>
-  <td><%= product.location_name %></td>
+  <td><%= product.location_name.present? ? product.location_name : 'N/A' %></td>
   <td>
     <%= button_to 'Remove From Cart', nil, remote: true, data: { product_id: product.id }, class: 'remove-from-cart-button btn btn-outline-danger' %>
   </td>

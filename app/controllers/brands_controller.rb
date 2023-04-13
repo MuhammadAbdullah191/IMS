@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class BrandsController < ApplicationController
-  before_action :set_brand, only: %i[show edit update destroy]
+  before_action :set_brand, only: [:show, :edit, :update, :destroy]
   before_action :attach_image, only: [:update]
   before_action :authorize_user
 
