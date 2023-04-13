@@ -19,10 +19,10 @@
       <p>N/A</p>
       <footer class="blockquote-footer m-1"> <cite title="Source Title">Add Image ? </cite></footer>
     <% end %>
-    <%= f.file_field :image %>
+    <%= f.file_field :image, accept:"image/*" %>
   </div>
   <div class="actions py-3">
-    <%= f.submit "Submit", class: 'btn btn-danger' %>
-    <%= link_to "Cancel", categories_path, class: "btn btn-secondary" %>
+    <%= f.submit 'Submit', class: 'btn btn-danger' %>
+    <%= link_to 'Cancel', categories_path, class: 'btn btn-secondary' %>
   </div>
 <% end %>

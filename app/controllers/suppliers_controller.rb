@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class SuppliersController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_supplier, only: [:show, :edit, :update, :destroy]
+  before_action :set_supplier, only: %i[show edit update destroy]
   before_action :attach_image, only: [:update]
   before_action :authorize_user
 
@@ -13,8 +15,7 @@ class SuppliersController < ApplicationController
     @supplier = Supplier.new
   end
 
-  def show
-  end
+  def show; end
 
   def create
     @supplier = Supplier.new(supplier_params)
@@ -27,11 +28,9 @@ class SuppliersController < ApplicationController
       flash[:danger] = @supplier.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
     end
-
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @supplier.update(supplier_params)
@@ -39,7 +38,7 @@ class SuppliersController < ApplicationController
       redirect_to supplier_path(@supplier)
     else
       flash[:danger] = @supplier.errors.full_messages.to_sentence
-      render :new, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
     
   end
@@ -50,7 +49,8 @@ class SuppliersController < ApplicationController
     else
       flash[:danger] = @supplier.errors.full_messages.to_sentence
     end
-      redirect_to suppliers_path
+    
+    redirect_to suppliers_path
   end
 
   private
@@ -58,14 +58,13 @@ class SuppliersController < ApplicationController
   def authorize_user
     authorize Supplier
   end
-  
-  def set_supplier
-    @supplier = Supplier.find_by_id(params[:id])
-    if @supplier.blank?
-      flash[:danger] = 'Record Not Found'
-      redirect_to suppliers_path
-    end
 
+  def set_supplier
+    @supplier = Supplier.find_by(id: params[:id])
+    return if @supplier.present?
+
+    flash[:danger] = 'Record Not Found'
+    redirect_to suppliers_path
   end
 
   def supplier_params
@@ -78,7 +77,7 @@ class SuppliersController < ApplicationController
     elsif !@supplier.image.attached? && @supplier.image.present?
       @supplier.image.attach(@supplier.image.blob)
     end
-    
+
   end
 
 end

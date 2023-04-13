@@ -36,6 +36,7 @@ gem 'devise'
 
 gem 'rubocop'
 
+gem 'rubocop-erb'
 gem 'rubocop-performance'
 gem 'rubocop-rails'
 gem 'rubocop-rspec'
@@ -86,3 +87,5 @@ gem 'chosen-rails'
 gem 'active_storage_validations'
 
 gem 'client_side_validations'
+
+gem 'faker'

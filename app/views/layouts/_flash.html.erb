@@ -1,6 +1,6 @@
-<%flash.each do|key,msg|%>
+<% flash.each do |key,msg| %>
   <div class= "d-flex flex-row justify-content-between alert alert-<%= key %> flash">
     <p><%= msg %></p>
     <i class="fa fa-close close-flash"></i>
   </div>
-<%end%>
+<% end %>

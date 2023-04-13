@@ -31,9 +31,5 @@ class OrderPolicy < ApplicationPolicy
   def download?
     index?
   end
-
-  def preview?
-    index?
-  end
 	
 end

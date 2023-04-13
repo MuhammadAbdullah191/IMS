@@ -17,7 +17,7 @@
             <td><%= @order_item.description %></td>
           </tr>
           <tr>
-            <th>Price</th>
+            <th>Total Price</th>
             <td><%= number_to_currency(@order_item.price) %></td>
           </tr>
           <tr>
@@ -30,15 +30,15 @@
           </tr>
           <tr>
             <th>Created At</th>
-            <td><%= @order_item.created_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+            <td><%= @order_item.created_at.strftime('%B %d, %Y at %I:%M %p') %></td>
           </tr>
           <tr>
             <th>Updated At</th>
-            <td><%= @order_item.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+            <td><%= @order_item.updated_at.strftime('%B %d, %Y at %I:%M %p') %></td>
           </tr>
         </tbody>
       </table>
-      <%= link_to "Back to Order Items", order_items_path, class: "btn btn-secondary" %>
+      <%= link_to 'Back to Order Items', order_items_path, class: 'btn btn-secondary' %>
     </div>
   </div>
 </div>

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_category, only: %i[show edit update destroy]
   before_action :attach_image, only: [:update]
   before_action :authorize_user
 
@@ -12,8 +14,7 @@ class CategoriesController < ApplicationController
     @category = Category.new
   end
 
-  def show
-  end
+  def show; end
 
   def create
     @category = Category.new(category_params)
@@ -29,17 +30,15 @@ class CategoriesController < ApplicationController
 
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
-
     if @category.update(category_params)
       flash[:success] = 'Category Updated Successfully'
       redirect_to category_path(@category)
     else
       flash[:danger] = @category.errors.full_messages.to_sentence
-      render :new, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
 
   end
@@ -50,6 +49,7 @@ class CategoriesController < ApplicationController
     else
       flash[:danger] = @category.errors.full_messages.to_sentence
     end
+
     redirect_to categories_path
   end
 
@@ -60,12 +60,12 @@ class CategoriesController < ApplicationController
   end
 
   def set_category
-    @category = Category.find_by_id(params[:id])
-    
-    if @category.blank?
-      flash[:danger] = 'Category Record Not Found'
-      redirect_to categories_path
-    end
+    @category = Category.find_by(id: params[:id])
+
+    return if @category.present?
+
+    flash[:danger] = 'Category Record Not Found'
+    redirect_to categories_path
     
   end
 
@@ -81,4 +81,5 @@ class CategoriesController < ApplicationController
     end
     
   end
+
 end

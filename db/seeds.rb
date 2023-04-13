@@ -1,3 +1,4 @@
+require 'faker'
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -20,19 +21,6 @@ Category.create(name: 'Category 2', description:"Category 2 Description", create
 Category.create(name: 'Category 1', description:"Category 1 Description", created_at: Time.now, updated_at: Time.now )
 Category.create(name: 'Category 3', description:"Category 3 Description", created_at: Time.now, updated_at: Time.now )
 
-Product.create(name: "Example Product", stock: 10, description: "This is an example product description.", price: 20, location_name: "Example Location", brand_id: 1, category_id: 1, supplier_id: 2, created_at: Time.now, updated_at: Time.now )
-Product.create(name: "Product 1", stock: 15, description: "This is a product description.", price: 50, location_name: "Location 1", brand_id: 2, category_id: 2, supplier_id: 4, created_at: Time.now, updated_at: Time.now)
-Product.create(name: "Product 2", stock: 20, description: "This is another product description.", price: 80, location_name: "Location 2", brand_id: 3, category_id: 3, supplier_id: 5, created_at: Time.now, updated_at: Time.now)
-Product.create(name: "Product 3", stock: 5, description: "This is a third product description.", price: 25, location_name: "Location 3", brand_id: 1, category_id: 1, supplier_id: 3, created_at: Time.now, updated_at: Time.now)
-Product.create(name: "Product 4", stock: 30, description: "This is a fourth product description.", price: 60, location_name: "Location 4", brand_id: 2, category_id: 3, supplier_id: 4, created_at: Time.now, updated_at: Time.now)
-Product.create(name: "Product 5", stock: 8, description: "This is a fifth product description.", price: 35, location_name: "Location 5", brand_id: 3, category_id: 1, supplier_id: 5, created_at: Time.now, updated_at: Time.now)
-Product.create(name: "Product 6", stock: 25, description: "This is a sixth product description.", price: 70, location_name: "Location 6", brand_id: 1, category_id: 2, supplier_id: 3, created_at: Time.now, updated_at: Time.now)
-Product.create(name: "Product 7", stock: 12, description: "This is a seventh product description.", price: 45, location_name: "Location 7", brand_id: 2, category_id: 1, supplier_id: 4, created_at: Time.now, updated_at: Time.now)
-Product.create(name: "Product 8", stock: 18, description: "This is an eighth product description.", price: 55, location_name: "Location 8", brand_id: 3, category_id: 3, supplier_id: 5, created_at: Time.now, updated_at: Time.now)
-Product.create(name: "Product 9", stock: 22, description: "This is a ninth product description.", price: 75, location_name: "Location 9", brand_id: 1, category_id: 2, supplier_id: 3, created_at: Time.now, updated_at: Time.now)
-Product.create(name: "Product 10", stock: 3, description: "This is a tenth product description.", price: 30, location_name: "Location 10", brand_id: 2, category_id: 3, supplier_id: 4, created_at: Time.now, updated_at: Time.now)
-Product.create(name: "Product 11", stock: 40, description: "This is an eleventh product description.", price: 90, location_name: "Location 11", brand_id: 3, category_id: 1, supplier_id: 5, created_at: Time.now, updated_at: Time.now)
-
 Seed Suppliers
 Supplier.create(name: "ABC Corporation", email: "abc@example.com", phone: "+923001234567", address: "123 Main Street, Karachi, Pakistan", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
 Supplier.create(name: "DEF Inc", email: "def@example.com", phone: "+923041234567", address: "456 Second Street, Lahore, Pakistan", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
@@ -54,37 +42,33 @@ Category.create(name: "Electronics", description: "Electronic devices and access
 Category.create(name: "Sports Equipment", description: "Equipment for sports and fitness", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
 Category.create(name: "Home Appliances", description: "Appliances for home use", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
 
-brands = Brand.all
 categories = Category.all
-suppliers = Supplier.all
+supplier = Supplier.all
+brand = Brand.all
 
-Product.create(name: "Apple iPhone 13", stock: 50, description: "New iPhone with A15 chip", price: 799.99, location_name: "Warehouse A", brand: brands.sample, category: categories.sample, supplier: suppliers.sample, created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
+name_length_range = 5..20
+description_length_range = 5..50
 
-Product.create(name: "Sony PS5", stock: 50, description: "Next-gen gaming console", price: 499.99, location_name: "Warehouse A", brand: brands.sample, category: categories.sample, supplier: suppliers.sample, created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
 
-Product.create(name: "Dell XPS 13", stock: 50, description: "Thin and light laptop", price: 1199.99, location_name: "Warehouse A", brand: brands.sample, category: categories.sample, supplier: suppliers.sample, created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
+50.times do
+  product = Product.new(
+    name: Faker::Commerce.product_name.slice(0, rand(name_length_range)),
+    stock: rand(1..100),
+    description: Faker::Lorem.paragraph.slice(0, rand(description_length_range)),
+    price: rand(10..1000),
+    location_name: Faker::Address.city,
+    brand_id: brand.sample.id,
+    created_at: Time.now,
+    updated_at: Time.now
+  )
 
-Product.create(name: "Bose QuietComfort ", stock: 50, description: "Noise-cancelling earbuds", price: 279.99, location_name: "Warehouse A", brand: brands.sample, category: categories.sample, supplier: suppliers.sample, created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
+  product.categories << categories.sample(rand(1..3))
+  product.suppliers << supplier.sample(rand(1..3))
+  product.save
+  p product
+end
 
-Product.create(name: "Nike Air Max 2090", stock: 50, description: "New futuristic sneaker", price: 149.99, location_name: "Warehouse A", brand: brands.sample, category: categories.sample, supplier: suppliers.sample, created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
 
-Product.create(name: "Samsung QLED TV", stock: 50, description: "Crystal clear picture", price: 1999.99, location_name: "Warehouse A", brand: brands.sample, category: categories.sample, supplier: suppliers.sample, created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
-
-Product.create(name: "Fitbit Charge 5", stock: 50, description: "Advanced fitness tracker", price: 179.99, location_name: "Warehouse A", brand: brands.sample, category: categories.sample, supplier: suppliers.sample, created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
-
-Product.create(name: "GoPro Hero 10", stock: 50, description: "High-quality action camera", price: 449.99, location_name: "Warehouse A", brand: brands.sample, category: categories.sample, supplier: suppliers.sample, created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
-
-Product.create(name: "Microsoft Laptop", stock: 50, description: "Versatile 2-in-1 device", price: 899.99, location_name: "Warehouse A", brand: brands.sample, category: categories.sample, supplier: suppliers.sample, created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
-
-Product.create(name: "Apple AirPods Pro", stock: 100, description: "Noise-cancelling earbuds", price: 249.99, location_name: "Warehouse B", brand: brands.sample, category: categories.sample, supplier: suppliers.sample, created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
-
-Product.create(name: "Fitbit Charge 5", stock: 75, description: "Fitness tracker with GPS", price: 179.99, location_name: "Warehouse C", brand: brands.sample, category: categories.sample, supplier: suppliers.sample, created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
-
-Product.create(name: "Sony WH-1000XM4", stock: 30, description: "Wireless noise-cancelling headphones", price: 349.99, location_name: "Warehouse A", brand: brands.sample, category: categories.sample, supplier: suppliers.sample, created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
-
-Product.create(name: "Nintendo  OLED", stock: 20, description: "New OLED version of the popular console", price: 349.99, location_name: "Warehouse B", brand: brands.sample, category: categories.sample, supplier: suppliers.sample, created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
-
-Product.create(name: "Bose QuietComfort Earbuds", stock: 50, description: "True wireless noise-cancelling earbuds", price: 279.99, location_name: "Warehouse C", brand: brands.sample, category: categories.sample, supplier: suppliers.sample, created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
 
 Order.create(consumer_name: "John Smith", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
 Order.create(consumer_name: "Emily Brown", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
@@ -113,14 +97,3 @@ OrderItem.create(quantity: 1, description: "Smart Lock", price: 2199, product: P
 OrderItem.create(quantity: 4, description: "USB-C Hub", price: 799, product: Product.all.sample, order: Order.all.sample)
 OrderItem.create(quantity: 1, description: "Wireless Mouse", price: 499, product: Product.all.sample, order: Order.all.sample)
 
-categories = Category.all
-
-Product.find_each do |product|
-  product.categories << categories.sample(rand(1..3))
-end
-
-supplier = Supplier.all
-
-Product.find_each do |product|
-  product.suppliers << supplier.sample(rand(1..3))
-end

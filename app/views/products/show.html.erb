@@ -22,7 +22,7 @@
           </tr>
           <tr>
             <th>Location Name</th>
-            <td><%= @product.location_name %></td>
+            <td><%= @product.location_name.present? ? @product.location_name : 'N/A' %></td>
           </tr>
           <tr>
             <th>Suppliers</th>
@@ -34,8 +34,8 @@
           </tr>
           <tr>
             <tr>
-              <th>Brand ID</th>
-              <td><%= @product.brand_id %></td>
+              <th>Brand Name</th>
+              <td><%= @product.brand.name %></td>
             </tr>
             <tr>
               <th>Categories</th>
@@ -47,15 +47,15 @@
             </tr>
             <tr>
               <th>Created At</th>
-              <td><%= @product.created_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+              <td><%= @product.created_at.strftime('%B %d, %Y at %I:%M %p') %></td>
             </tr>
             <tr>
               <th>Updated At</th>
-              <td><%= @product.updated_at.strftime("%B %d, %Y at %I:%M %p") %></td>
+              <td><%= @product.updated_at.strftime('%B %d, %Y at %I:%M %p') %></td>
             </tr>
           </tbody>
         </table>
-        <%= link_to "Back to Product", products_path, class: "btn btn-secondary" %>
+        <%= link_to 'Back to Product', products_path, class: 'btn btn-secondary' %>
       </div>
       <div class="col-md-6 text-center">
         <% if @product.image.attached? %>

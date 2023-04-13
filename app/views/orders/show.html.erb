@@ -5,7 +5,7 @@
       <div class="card">
         <div class="card-body">
           <p class="card-text">Order ID: <%= @order.id %></p>
-          <p class="card-text">Order Date: <%= @order.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+          <p class="card-text">Order Date: <%= @order.created_at.strftime('%B %d, %Y at %I:%M %p') %></p>
         </div>
       </div>
       <h2 class="mt-4 mb-3">Order Items</h2>
@@ -22,7 +22,7 @@
           <% @order.order_items.each do |item| %>
             <tr>
               <td><%= item.description %></td>
-              <td><%= number_to_currency(item.price) %></td>
+              <td><%= number_to_currency(item.product.price) %></td>
               <td><%= item.quantity %></td>
               <td><%= number_to_currency(item.price) %></td>
             </tr>
@@ -30,11 +30,12 @@
         </tbody>
       </table>
       <div id="total-price" class="text-center">
-        Total Price: $<%= @order.order_items.sum { |item| item.price } %>
+        Total Price: $<%= @order.order_items.sum(&:price) %>
     </div>
     </div>
   </div>
   <div class= 'text-center m-5'>
-    <%= link_to "Download Slip", download_order_path(@order), class: "btn btn-primary" %>
+    <%= link_to 'Download Slip', download_order_path(@order), class: ' btn btn-primary' %>
+    <%= link_to 'Go to Orders', request.referer, class: 'btn btn-primary' %>
   </div>
 </div>
