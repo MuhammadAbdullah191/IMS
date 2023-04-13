@@ -20,7 +20,7 @@ class PdfCreator
     @pdf.text 'Products Ordered', size: 16, style: :bold
     table_data = [['Name', 'Price', 'Quantity', 'Total Price']]
     @order.order_items.each do |item|
-      table_data << [item.description, item.price, item.quantity, item.price]
+      table_data << [item.description, item.product.price, item.quantity, item.price]
     end
     @pdf.table table_data, header: true, position: :center, width: 500
     @pdf.move_down 20

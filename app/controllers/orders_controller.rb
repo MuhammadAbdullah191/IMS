@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @q = Product.ransack(params[:q])
-    @products = @q.result(distinct: true).all.page(params[:page]).per(10)
+    @products = @q.result(distinct: true).all.page(params[:page]).per(15)
   end
 
   def show; end
@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
       redirect_to order_path(@order)
     else
       flash[:danger] = 'Unable to create order please try again'
-      render :new, status: :unprocessable_entity
+      redirect_to new_order_path
     end
 
   end

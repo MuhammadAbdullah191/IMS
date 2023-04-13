@@ -9,7 +9,7 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: true, length: { minimum: 5, maximum: 20 }
   validates :stock, numericality: { greater_than_or_equal_to: 1 }, on: :create
   validates :stock, numericality: { greater_than_or_equal_to: 0 }
-  validates :description, presence: true, length: { minimum: 5, maximum: 50 }
+  validates :description, presence: true, length: { minimum: 5, maximum: 200 }
   validates :price, numericality: { greater_than_or_equal_to: 1 }
   validates :categories, presence: true
   validates :suppliers, presence: true

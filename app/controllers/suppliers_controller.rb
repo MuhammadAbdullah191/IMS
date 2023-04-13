@@ -38,7 +38,7 @@ class SuppliersController < ApplicationController
       redirect_to supplier_path(@supplier)
     else
       flash[:danger] = @supplier.errors.full_messages.to_sentence
-      render :new, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
     
   end
@@ -49,6 +49,7 @@ class SuppliersController < ApplicationController
     else
       flash[:danger] = @supplier.errors.full_messages.to_sentence
     end
+    
     redirect_to suppliers_path
   end
 

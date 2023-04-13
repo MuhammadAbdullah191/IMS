@@ -3,13 +3,7 @@
     <h1 class="text-secondary">Manage Brands</h1>
   </div>
   <div class="text-center">
-    <%= search_form_for @q, url: brands_path do |f| %>
-      <div class = 'p-2'>
-        <%= f.label :name_or_description_cont %>
-        <%= f.search_field :name_or_description_cont, placeholder: 'name or desc contains' %>
-        <%= f.submit %>
-      <% end %>
-    </div>
+    <%= render partial: 'layouts/search', locals: { path: brands_path, label: 'name_or_description_cont' } %>
     <div class="container p-1">
       <div class="row">
         <div class="col-12">

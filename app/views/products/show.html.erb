@@ -22,7 +22,7 @@
           </tr>
           <tr>
             <th>Location Name</th>
-            <td><%= @product.location_name %></td>
+            <td><%= @product.location_name.present? ? @product.location_name : 'N/A' %></td>
           </tr>
           <tr>
             <th>Suppliers</th>
@@ -34,8 +34,8 @@
           </tr>
           <tr>
             <tr>
-              <th>Brand ID</th>
-              <td><%= @product.brand_id %></td>
+              <th>Brand Name</th>
+              <td><%= @product.brand.name %></td>
             </tr>
             <tr>
               <th>Categories</th>

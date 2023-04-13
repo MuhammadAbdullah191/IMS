@@ -38,7 +38,7 @@ class ProductsController < ApplicationController
       redirect_to product_path(@product)
     else
       flash[:danger] = @product.errors.full_messages.to_sentence
-      render :new, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
 
   end
@@ -49,6 +49,7 @@ class ProductsController < ApplicationController
     else
       flash[:danger] = @product.errors.full_messages.to_sentence
     end
+    
     redirect_to products_path
   end
 

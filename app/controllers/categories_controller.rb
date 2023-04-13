@@ -38,7 +38,7 @@ class CategoriesController < ApplicationController
       redirect_to category_path(@category)
     else
       flash[:danger] = @category.errors.full_messages.to_sentence
-      render :new, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
 
   end

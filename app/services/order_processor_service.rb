@@ -16,6 +16,8 @@ class OrderProcessorService
       return @order
     rescue ArgumentError => e
       raise ActiveRecord::Rollback
+    rescue => e
+      raise ActiveRecord::Rollback
     end
   end
 

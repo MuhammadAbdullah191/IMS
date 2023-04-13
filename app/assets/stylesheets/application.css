@@ -49,3 +49,12 @@
 .message{
   color: red;
 }
+
+.role {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #462b04; /* or any other color you prefer */
+  color: #fff;
+}

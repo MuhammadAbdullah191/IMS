@@ -38,7 +38,7 @@ class BrandsController < ApplicationController
       redirect_to brand_path(@brand)
     else
       flash[:danger] = @brand.errors.full_messages.to_sentence
-      render :new, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
 
   end
