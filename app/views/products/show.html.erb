@@ -47,22 +47,16 @@
             </tr>
             <tr>
               <th>Created At</th>
-              <td><%= @product.created_at.strftime('%B %d, %Y at %I:%M %p') %></td>
+              <td><%= formatted_date(@product.created_at) %></td>
             </tr>
             <tr>
               <th>Updated At</th>
-              <td><%= @product.updated_at.strftime('%B %d, %Y at %I:%M %p') %></td>
+              <td><%= formatted_date(@product.updated_at) %></td>
             </tr>
           </tbody>
         </table>
         <%= link_to 'Back to Product', products_path, class: 'btn btn-secondary' %>
       </div>
-      <div class="col-md-6 text-center">
-        <% if @product.image.attached? %>
-          <%= image_tag @product.image, class: 'w-50 rounded m-5' %>
-        <% else %>
-          <img src="/assets/Image_not_available.png" alt="image not available"  class='w-50 h-75 rounded m-5'>
-        <% end %>
-      </div>
+      <%= render partial: 'layouts/show_image', locals: { resource: @product } %>
     </div>
   </div>

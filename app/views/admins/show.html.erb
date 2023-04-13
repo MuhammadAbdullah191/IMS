@@ -18,11 +18,11 @@
           </tr>
           <tr>
             <th>Created At</th>
-            <td><%= @user.created_at.strftime('%B %d, %Y at %I:%M %p') %></td>
+            <td><%= formatted_date(@user.created_at) %></td>
           </tr>
           <tr>
             <th>Updated At</th>
-            <td><%= @user.updated_at.strftime('%B %d, %Y at %I:%M %p') %></td>
+            <td><%= formatted_date(@user.updated_at) %></td>
           </tr>
         </tbody>
       </table>

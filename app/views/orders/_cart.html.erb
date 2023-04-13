@@ -15,17 +15,7 @@
       </thead>
       <tbody>
         <% @cart.each_with_index do |product,index| %>
-          <tr>
-            <td><%= product.name %></td>
-            <td><%= number_field_tag "product[#{product.id}]", 1, in: 1..product.stock, id: "field-#{product.id}"%></td>
-            <td><%= product.stock %></td>
-            <td id="product-price-<%= product.id %>"><%= product.price %></td>
-            <td id="total-price-<%= product.id %>"><%= product.price %></td>
-            <td><%= product.location_name.present? ? product.location_name : 'N/A' %></td>
-            <td>
-              <%= button_to 'Remove From Cart', nil, remote: true, data: { product_id: product.id }, class: 'remove-from-cart-button btn btn-outline-danger' %>
-            </td>
-          </tr>
+          <%= render partial: 'orders/cart_row', locals: { product: product } %>
         <% end %>
       </tbody>
     </table>
