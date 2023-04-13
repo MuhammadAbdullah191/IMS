@@ -1,13 +1,13 @@
 module OrderItemsHelper
-	def total_orders
-		Order.all.count
-	end
+  def total_orders
+    Order.all.count
+  end
 
-	def total_orders_price
-		OrderItem.all.sum(:price)
-	end
+  def total_orders_price
+    OrderItem.all.sum(:price)
+  end
 
-	def orders_by_day
+  def orders_by_day
     Order.group_by_day(:created_at).count
   end
 
@@ -19,9 +19,9 @@ module OrderItemsHelper
     OrderItem.joins(:product).group('products.name').sum(:price).first(5)
   end
 
-	def top_revenue_products_sum
-		top_products_by_revenue.first(5).map { |product| product[1] }.sum
-	end
+  def top_revenue_products_sum
+    top_products_by_revenue.first(5).map { |product| product[1] }.sum
+  end
 
   def quantity_by_product
     OrderItem.joins(:product).group('products.name').sum(:quantity)
