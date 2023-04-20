@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 class AdminsController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user
 
   def index
-    @users = Admin.all
-    @users = @users.all.page(params[:page]).per(6)
+    @users = Admin.all.page(params[:page]).per(6)
   end
 
   def new

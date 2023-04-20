@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class OrderProcessorService
-  attr_reader :order_params
-
   def initialize(order_params)
     @order_params = order_params
   end

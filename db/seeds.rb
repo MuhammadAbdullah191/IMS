@@ -7,7 +7,7 @@ require 'faker'
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Admin.create!(email: 'test@test.com', role: 'Admin', password: '111111', password_confirmation: '111111', username: 'test', phone: '03349949490') if Rails.env.development?
+Admin.create!(email: 'test@test.com', role: 'Admin', password: '111111', password_confirmation: '111111', username: 'testing', phone: '03349949490') if Rails.env.development?
 
 Supplier.create(name: 'Supplier 2', email: 'supplier3@gmail.com', phone: '03215472014', address: 'House No 1 Supplier Society Islamabad', created_at: Time.now, updated_at: Time.now)
 Supplier.create(name: 'Supplier 5', email: 'supplier5@gmail.com', phone: '03215666666', address: 'House No 4 Supplier Society Karachi', created_at: Time.now, updated_at: Time.now)
@@ -21,7 +21,7 @@ Category.create(name: 'Category 2', description:"Category 2 Description", create
 Category.create(name: 'Category 1', description:"Category 1 Description", created_at: Time.now, updated_at: Time.now )
 Category.create(name: 'Category 3', description:"Category 3 Description", created_at: Time.now, updated_at: Time.now )
 
-Seed Suppliers
+# Seed Suppliers
 Supplier.create(name: "ABC Corporation", email: "abc@example.com", phone: "+923001234567", address: "123 Main Street, Karachi, Pakistan", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
 Supplier.create(name: "DEF Inc", email: "def@example.com", phone: "+923041234567", address: "456 Second Street, Lahore, Pakistan", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)
 Supplier.create(name: "GHI Enterprises", email: "ghi@example.com", phone: "+923081234567", address: "789 Third Street, Islamabad, Pakistan", created_at: (rand(6.days.ago..Time.now)).to_datetime, updated_at: Time.now)

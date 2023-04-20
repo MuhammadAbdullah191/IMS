@@ -2,8 +2,7 @@
 
 class OrderItemsController < ApplicationController
   def index
-    @order_items = OrderItem.all
-    @order_items = @order_items.all.page(params[:page]).per(6)
+    @order_items = OrderItem.all.page(params[:page]).per(6)
   end
 
   def show

@@ -2,7 +2,7 @@
 
 class OrdersController < ApplicationController
   before_action :set_pdf, only: [:download]
-  before_action :set_order, only: %i[show destroy]
+  before_action :set_order, only: [:show, :destroy]
   before_action :check_cart, only: [:create]
   before_action :check_params, only: [:create]
   before_action :authorize_user

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[edit update show destroy]
+  before_action :set_product, only: [:edit, :update, :show, :destroy]
   before_action :attach_image, only: [:update]
   before_action :authorize_user
 
