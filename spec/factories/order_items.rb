@@ -7,4 +7,5 @@ FactoryBot.define do
 		product { create(:product) }
 		order { create(:order) }
   end
+  
 end

@@ -14,5 +14,7 @@ FactoryBot.define do
         content_type: 'image/jpeg'
       )
     end
+
   end
+  
 end

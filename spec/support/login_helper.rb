@@ -9,6 +9,8 @@ RSpec.configure do |config|
       click_button 'Log in'
       expect(page).to have_content('Welcome To IMS')
     end
+
   end
+
   config.include LoginHelper
 end
