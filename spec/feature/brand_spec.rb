@@ -66,7 +66,7 @@ RSpec.describe 'Brand feature', type: :feature do
     expect(Brand.find_by(id: brand.id)).to be_nil
   end
 
-  it "deleted brand: failure case" do
+  scenario "deleted brand: failure case" do
     allow_any_instance_of(Brand).to receive(:destroy).and_return(false)
     visit brands_path
     find('a.btn-danger[href="' + brand_path(brand) + '"]').click

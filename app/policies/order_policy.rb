@@ -17,11 +17,9 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def edit?
-    new?
   end
 
   def update?
-    edit?
   end
 
   def destroy?

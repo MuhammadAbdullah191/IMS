@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   before_action :set_pdf, only: [:download]
   before_action :set_order, only: [:show, :destroy]
   before_action :check_cart, only: [:create]
-  before_action :check_params, only: [:create]
+  before_action :check_params, only: [:index]
   before_action :authorize_user
 
   def index
@@ -91,7 +91,4 @@ class OrdersController < ApplicationController
 
   end
 
-  def order_params
-    params.require(:order).permit(:product)
-  end
 end

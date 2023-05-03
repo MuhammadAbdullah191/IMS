@@ -74,8 +74,6 @@ class BrandsController < ApplicationController
   def attach_image
     if params[:brand][:image].present?
       @brand.image.attach(params[:brand][:image])
-    elsif !@brand.image.attached? && @brand.image.present?
-      @brand.image.attach(@brand.image.blob)
     end
 
   end

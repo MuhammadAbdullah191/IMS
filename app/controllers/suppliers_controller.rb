@@ -74,8 +74,6 @@ class SuppliersController < ApplicationController
   def attach_image
     if params[:supplier][:image].present?
       @supplier.image.attach(params[:supplier][:image])
-    elsif !@supplier.image.attached? && @supplier.image.present?
-      @supplier.image.attach(@supplier.image.blob)
     end
 
   end

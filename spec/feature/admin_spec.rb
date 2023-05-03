@@ -100,7 +100,7 @@ RSpec.feature 'Admins', type: :feature do
     expect(Admin.find_by(id: admin_1.id)).to be_nil
   end
 
-  it "deleted admin: failure case" do
+  scenario "deleted admin: failure case" do
     allow_any_instance_of(Admin).to receive(:destroy).and_return(false)
     visit admins_path
     find('a.btn-danger[href="' + admin_path(admin_1) + '"]').click

@@ -66,7 +66,7 @@ RSpec.describe 'Order feature', type: :feature do
     expect(page).to have_current_path(orders_path)
   end
 
-  it 'rolls back transaction if an error occurs' do
+  scenario 'rolls back transaction if an error occurs' do
     order_params = nil
     expect { OrderProcessorService.new(order_params).process_order }.not_to raise_error
   end
