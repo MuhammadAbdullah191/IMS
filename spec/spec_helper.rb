@@ -4,6 +4,11 @@
 # this file to always be loaded, without a need to explicitly require it in any
 # files.
 #
+require 'simplecov'
+SimpleCov.start do
+  add_filter "/app/policies/application_policy.rb" 
+  add_filter "spec/rails_helper.rb"
+end
 # Given that it is always loaded, you are encouraged to keep this file as
 # light-weight as possible. Requiring heavyweight dependencies from this file
 # will add to the boot time of your test suite on EVERY test run, even for an
