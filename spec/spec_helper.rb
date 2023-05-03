@@ -5,6 +5,7 @@
 # files.
 #
 require 'simplecov'
+require 'support/login_helper'
 SimpleCov.start do
   add_filter "/app/policies/application_policy.rb" 
   add_filter "spec/rails_helper.rb"
