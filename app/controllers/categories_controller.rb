@@ -76,8 +76,6 @@ class CategoriesController < ApplicationController
   def attach_image
     if params[:category][:image].present?
       @category.image.attach(params[:category][:image])
-    elsif !@category.image.attached? && @category.image.present?
-      @category.image.attach(@category.image.blob)
     end
     
   end

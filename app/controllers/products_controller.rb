@@ -93,8 +93,6 @@ class ProductsController < ApplicationController
   def attach_image
     if params[:product][:image].present?
       @product.image.attach(params[:product][:image])
-    elsif !@product.image.attached? && @product.image.present?
-      @product.image.attach(@product.image.blob)
     end
 
   end

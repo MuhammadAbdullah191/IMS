@@ -8,6 +8,7 @@ class Admin < ApplicationRecord
 
   enum role: { Admin: 0, Cashier: 1 }
   validates :role, presence: true
+  validates :role, inclusion: { in: roles.keys }
   validates :username, presence: true, length: { minimum: 5, maximum: 20 }
   validates :password, confirmation: true
   validates :password_confirmation, presence: true
