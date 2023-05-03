@@ -14,4 +14,5 @@ RSpec.describe 'Application feature', type: :feature do
     visit '/brands99999'
     expect(page).to have_content('This route does not exist')
   end
+  
 end

@@ -105,5 +105,4 @@ require 'rails_helper'
       expect(page).to have_current_path(products_path)
     end
 
-
 end

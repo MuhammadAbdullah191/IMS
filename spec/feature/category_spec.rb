@@ -81,5 +81,4 @@ RSpec.describe 'Categories feature', type: :feature do
     expect(page).to have_current_path(categories_path)
   end
 
-
 end

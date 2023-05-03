@@ -40,5 +40,7 @@ RSpec.describe OrderItem, type: :model do
       expect(order_item).not_to be_valid
       expect(order_item.errors.messages[:quantity]).to eq ["must be greater than or equal to 1"]
     end
+
   end
+  
 end
